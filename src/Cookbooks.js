@@ -1,10 +1,10 @@
-import ListGroup from "react-bootstrap/ListGroup";
+import { Nav } from 'react-bootstrap'
 import * as cookbooksAPI from "./api/cookbook";
 
 
 const createCookbooksList =() => {
   const cookbooks = cookbooksAPI.getCookbooks();
-  return cookbooks.map(cookbook => <p className="centerItem" key={cookbook.id}>{cookbook.name}</p>)
+  return cookbooks.map(cookbook => <Nav.Link to={`/${cookbook.id}`} className="centerItem" key={cookbook.id}>{cookbook.name}</Nav.Link>)
 }
 
 function Cookbooks() {
