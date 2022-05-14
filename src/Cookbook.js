@@ -1,7 +1,8 @@
 function Cookbook() { 
+	
 	return(
 		<div>
-			This is a cookbook
+			This is a single cookbook
 		</div>
 	)
 }
