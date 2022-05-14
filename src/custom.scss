@@ -32,3 +32,27 @@ $font-family-sans-serif: Mate;
 
 
 @import '~bootstrap/scss/bootstrap.scss';
+
+.centerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 50%;
+    max-height: 50%;
+    margin-left: 25%;
+    margin-top: 5%;
+    background-color: #F2F4F3;
+}
+
+.title {
+    text-align: center;
+}
+
+.centerItem {
+    align-self: center;
+    text-align: center;
+}
+
+.nav-link {
+    color: #373D20;
+}

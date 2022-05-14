@@ -8,6 +8,7 @@ import {
 import './custom.scss';
 import App from './App';
 import Cookbook from './Cookbook';
+import Cookbooks from './Cookbooks'; 
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,7 +16,9 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="cookbooks" element={<Cookbook />}/>
+        <Route path="cookbooks" element={<Cookbooks />}>
+          <Route path="cookbooks/:cookbookId" element={<Cookbook />}/>
+        </Route>
       </Route>
     </Routes>
   </BrowserRouter>
