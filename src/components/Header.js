@@ -8,7 +8,7 @@ import * as cookbooksAPI from "../api/cookbook";
 const cookbookDropdownItems = () => {
   
   const cookbooks = cookbooksAPI.getCookbooks();
-  const dropdownItems = cookbooks.map(cookbook => <NavDropdown.Item key={cookbook.id} href={`cookbooks/${cookbook.id}`}>{cookbook.name}</NavDropdown.Item>);
+  const dropdownItems = cookbooks.map(cookbook => <NavDropdown.Item key={cookbook.id} href={`/cookbooks/${cookbook.id}`}>{cookbook.name}</NavDropdown.Item>);
 
   dropdownItems.push(
     [
