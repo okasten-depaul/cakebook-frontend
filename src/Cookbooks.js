@@ -4,7 +4,7 @@ import * as cookbooksAPI from "./api/cookbook";
 
 const createCookbooksList =() => {
   const cookbooks = cookbooksAPI.getCookbooks();
-  return cookbooks.map(cookbook => <Nav.Link to={`/${cookbook.id}`} className="centerItem" key={cookbook.id}>{cookbook.name}</Nav.Link>)
+  return cookbooks.map(cookbook => <a href={`${cookbook.id}`} className="centerItem" key={cookbook.id}>{cookbook.name}</a>)
 }
 
 function Cookbooks() {

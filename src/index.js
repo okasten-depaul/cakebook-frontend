@@ -16,8 +16,8 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="cookbooks" element={<Cookbooks />}>
-          <Route path="cookbooks/:cookbookId" element={<Cookbook />}/>
+        <Route path="/cookbooks" element={<Cookbooks />}>
+          <Route path=":id" element={<Cookbook />}/>
         </Route>
       </Route>
     </Routes>
