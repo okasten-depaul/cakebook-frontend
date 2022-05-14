@@ -5,8 +5,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
+import './custom.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
