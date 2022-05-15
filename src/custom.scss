@@ -44,8 +44,16 @@ $font-family-sans-serif: Mate;
     background-color: #F2F4F3;
 }
 
+.cookbookForm {
+    max-width: 30%;
+    max-height: 30%;
+    margin-left: 35%;
+}
+
 .title {
     text-align: center;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 
 .centerItem {
@@ -56,3 +64,20 @@ $font-family-sans-serif: Mate;
 a {
     color: #373D20;
 }
+
+.formInput {
+    min-width: 75%;
+    align-self: center;
+    text-align: center;
+}
+
+.btn {
+    margin-top: 4%;
+    min-width: 40%;
+    margin-bottom: 4%;
+}
+
+.form-control {
+    background-color: #C4C4C4;
+}
+

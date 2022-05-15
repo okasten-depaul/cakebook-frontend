@@ -6,15 +6,14 @@ import Container from "react-bootstrap/Container";
 import * as cookbooksAPI from "../api/cookbook";
 
 const cookbookDropdownItems = () => {
-  
   const cookbooks = cookbooksAPI.getCookbooks();
   const dropdownItems = cookbooks.map(cookbook => <NavDropdown.Item key={cookbook.id} href={`/cookbooks/${cookbook.id}`}>{cookbook.name}</NavDropdown.Item>);
 
   dropdownItems.push(
     [
       <NavDropdown.Divider />,
-      <NavDropdown.Item key="all" href="cookbooks">View All Cookbooks</NavDropdown.Item>,
-      <NavDropdown.Item key="new" href="cookbooks/new">Create New Cookbook</NavDropdown.Item>
+      <NavDropdown.Item key="all" href="/cookbooks">View All Cookbooks</NavDropdown.Item>,
+      <NavDropdown.Item key="new" href="/cookbooks/new">Create New Cookbook</NavDropdown.Item>
     ]
   )
 
