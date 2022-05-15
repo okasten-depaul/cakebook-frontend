@@ -7,7 +7,7 @@ function Cookbooks() {
   const isIndex = window.location.pathname === "/cookbooks";
 
   const createCookbooksList = () => {
-    return cookbooks.map(cookbook => <a href={`${cookbook.id}`} className="centerItem" key={cookbook.id}>{cookbook.name}</a>)
+    return cookbooks.map(cookbook => <a href={`/cookbooks/${cookbook.id}`} className="centerItem" key={cookbook.id}>{cookbook.name}</a>)
   }
 
   const indexPage = () => {
