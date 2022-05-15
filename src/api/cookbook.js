@@ -1,3 +1,5 @@
+const API_URL = 'somestring';
+
 export function getCookbooks() {
   return [
     {
@@ -17,5 +19,6 @@ export function getCookbooks() {
 
 export function createNewCookbook(name) {
   //placeholder
+  //fetch(API_URL).then(r => r.json())
   return true;
 }
