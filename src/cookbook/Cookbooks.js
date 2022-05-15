@@ -8,20 +8,20 @@ const createCookbooksList = () => {
 }
 
 function indexPage() {
-  <div className="centerContainer">
+  return(
+    <div className="centerContainer cookbookIndex">
       <h1 className="title">My Cookbooks</h1>
       {createCookbooksList()}
-      <Outlet/>
     </div>
+  )
 }
 
 function Cookbooks() {
   const isIndex = window.location.pathname === "/cookbooks";
 
   return (
-    <div className="centerContainer">
-      {isIndex && indexPage()}
-      <Outlet/>
+    <div>
+      {isIndex ? indexPage() : <Outlet/>}
     </div>
     
   )

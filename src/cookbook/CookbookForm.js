@@ -1,6 +1,6 @@
 function CookbookForm() {
   return(
-    <div className="centeredContainer">
+    <div className="centerContainer cookbookForm">
       Hello
     </div>
   )

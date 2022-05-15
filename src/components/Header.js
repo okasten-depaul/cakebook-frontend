@@ -12,7 +12,7 @@ const cookbookDropdownItems = () => {
   dropdownItems.push(
     [
       <NavDropdown.Divider />,
-      <NavDropdown.Item key="all" href="cookbooks">View All Cookbooks</NavDropdown.Item>,
+      <NavDropdown.Item key="all" href="/cookbooks">View All Cookbooks</NavDropdown.Item>,
       <NavDropdown.Item key="new" href="/cookbooks/new">Create New Cookbook</NavDropdown.Item>
     ]
   )
