@@ -15,6 +15,7 @@ export function getCookbooks() {
   ]
 }
 
-export function createNewCookbook() {
-  return 204
+export function createNewCookbook(name) {
+  //placeholder
+  return true;
 }
