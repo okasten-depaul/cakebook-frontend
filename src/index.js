@@ -7,8 +7,9 @@ import {
 } from "react-router-dom";
 import './custom.scss';
 import App from './App';
-import Cookbook from './Cookbook';
-import Cookbooks from './Cookbooks'; 
+import Cookbook from './cookbook/Cookbook';
+import Cookbooks from './cookbook/Cookbooks'; 
+import CookbookForm from './cookbook/CookbookForm';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,8 +17,9 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="/cookbooks" element={<Cookbooks />}>
+        <Route path="cookbooks" element={<Cookbooks />}>
           <Route path=":id" element={<Cookbook />}/>
+          <Route path="new" element={<CookbookForm />}/>
         </Route>
       </Route>
     </Routes>
