@@ -68,11 +68,16 @@ a {
 .formInput {
     min-width: 75%;
     align-self: center;
+    text-align: center;
 }
 
 .btn {
     margin-top: 4%;
     min-width: 40%;
     margin-bottom: 4%;
-    margin-left: 30%;
 }
+
+.form-control {
+    background-color: #C4C4C4;
+}
+

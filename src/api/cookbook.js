@@ -14,3 +14,7 @@ export function getCookbooks() {
     }
   ]
 }
+
+export function createNewCookbook() {
+  return 204
+}
