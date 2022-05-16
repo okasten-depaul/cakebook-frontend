@@ -4,7 +4,7 @@ const REQUEST_HEADERS = {
 }
 
 export function getCookbooks() {
-  return [
+  /*return [
     {
       id: 1,
       name: 'Cookbook 1'
@@ -17,13 +17,46 @@ export function getCookbooks() {
       id: 3,
       name: 'Cookbook 3'
     }
-  ]
+  */ 
+const cookbookarray = [
+  {
+    id: 1,
+    name: 'Cookbook 1'
+  },
+  {
+    id: 2,
+    name: 'Cookbook 2'
+  },
+  {
+    id: 3,
+    name: 'Cookbook 3'
+  }]
 
-  // fetch(`${API_URL}/api/cookbooks`, {mode: 'no-cors'})
-  // .then(r => r.json())
-  // .then(data => {
+ const response = fetch(`${API_URL}/api/cookbook/get/1`) 
+ .then(response => response. json())
+ . then(data => {
+  console. log(data)
+ })
+  . catch(error => console. error(error))
+        
+        for(var i in response) {
+           cookbookarray.push([i, response[i]])
+           console.log(response[i])
+           
+        }
+  console.log(cookbookarray)
+
+  return cookbookarray
+  
+
+  
+
+
 
   // })
+
+
+return cookbookarray
 }
 
 export function createNewCookbook(name) {
