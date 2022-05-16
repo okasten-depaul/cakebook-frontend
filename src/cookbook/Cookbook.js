@@ -31,7 +31,7 @@ function Cookbook() {
 
 	const bottomButtons = () => {
 		return (
-			<ButtonToolbar className=" justify-content-between">
+			<ButtonToolbar style={{justifyContent: 'space-around'}}>
 				<ButtonGroup>
 					<Button variant="primary">Add New Recipe</Button>
 				</ButtonGroup>
