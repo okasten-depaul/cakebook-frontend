@@ -10,6 +10,8 @@ import App from './App';
 import Cookbook from './cookbook/Cookbook';
 import Cookbooks from './cookbook/Cookbooks'; 
 import CookbookForm from './cookbook/CookbookForm';
+import Mealplan from './mealplan/Mealplan';
+import Mealplans from './mealplan/Mealplans';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,7 +23,11 @@ root.render(
           <Route path=":id" element={<Cookbook />}/>
           <Route path="new" element={<CookbookForm />}/>
         </Route>
+        <Route path="mealplans" element = {<Mealplans />}>
+          <Route path=":id" element={<Mealplan />}/>
+        </Route>
       </Route>
+      
     </Routes>
   </BrowserRouter>
   

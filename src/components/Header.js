@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import * as cookbooksAPI from "../api/cookbook";
+import * as mealplansAPI from "../api/mealplan"
 
 const cookbookDropdownItems = () => {
   const cookbooks = cookbooksAPI.getCookbooks();
@@ -20,6 +21,21 @@ const cookbookDropdownItems = () => {
   return dropdownItems;
 }
 
+const mealPlanDropdownItems = () => {
+  const mealplans = mealplansAPI.getMealplans();
+  const dropdownItems = mealplans.map(mealplan => <NavDropdown.Item key={mealplan.id} href={`/mealplans/${mealplan.id}`}>{mealplan.week}</NavDropdown.Item>);
+
+  dropdownItems.push(
+    [
+      <NavDropdown.Divider />,
+      <NavDropdown.Item key="all" href="/mealplans">View All Mealplans</NavDropdown.Item>,
+      <NavDropdown.Item key="new" href="/mealplans/new">Create New Mealplan</NavDropdown.Item>
+    ]
+  )
+
+  return dropdownItems;
+}
+
 function Header() {
   return(
     <Navbar bg="light" expand="lg">
@@ -30,6 +46,10 @@ function Header() {
         <Nav className="me-auto">
           <NavDropdown title="My Cookbooks" id="basic-nav-dropdown">
             {cookbookDropdownItems()}
+          </NavDropdown>
+          <NavDropdown title = "Mealplans" id = "basic-nav-dropdown">
+            {mealPlanDropdownItems()}
+
           </NavDropdown>
         </Nav>
         </Navbar.Collapse>
