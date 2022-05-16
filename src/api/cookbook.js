@@ -22,3 +22,16 @@ export function createNewCookbook(name) {
   //fetch(API_URL).then(r => r.json())
   return true;
 }
+
+export function getCookbook(id) { 
+  return {
+    name: 'Baking book',
+    recipes: [
+      {
+        id: 1,
+        ingredients: [],
+        name: 'Recipe 1'
+      }
+    ]
+  }
+}
