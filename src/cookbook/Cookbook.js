@@ -6,13 +6,12 @@ import { getCookbook } from '../api/cookbook';
 import Recipe from '../recipe/Recipe';
 
 function Cookbook() { 
-
-	const [cookbook, setCookbook] = useState({name: ''});
-	const [recipe, setRecipe] = useState({});
+	const [cookbook, setCookbook] = useState(null);
+	const [recipe, setRecipe] = useState(null);
 
 	useEffect(() => {
 		setCookbook(getCookbook(window.location.pathname.match(/([1-9])+/g)[0]));
-	}, [cookbook])
+	}, [])
 
 	const cookbookContainer = () => {
 		return (
@@ -25,7 +24,7 @@ function Cookbook() {
 	}
 
 	const recipeList = () => {
-		return cookbook.recipes && cookbook.recipes.map(recipe => {
+		return cookbook.recipes.map(recipe => {
 			return <h5 onClick={() => setRecipe(recipe)} key={recipe.id} className="title">{recipe.name}</h5>
 		})
 	}
@@ -45,8 +44,8 @@ function Cookbook() {
 	
 	return(
 		<div className="sideBySide">
-			{cookbookContainer()}
-			{recipe.id && <Recipe recipe={recipe}/>}
+			{cookbook && cookbookContainer()}
+			{recipe && <Recipe recipe={recipe}/>}
 		</div>
 		
 	)
