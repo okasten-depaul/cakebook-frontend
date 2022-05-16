@@ -25,6 +25,8 @@ function Cookbooks() {
     // .then(cookbooks => setCookbooks(cookbooks))
   }, [])
 
+  
+
   return (
     <div>
       {isIndex ? indexPage() : <Outlet/>}
