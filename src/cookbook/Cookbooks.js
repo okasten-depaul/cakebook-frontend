@@ -20,8 +20,10 @@ function Cookbooks() {
   }
 
   useEffect(() => {
-    const cookbooks = cookbooksAPI.getCookbooks();
-    setCookbooks(cookbooks);
+    cookbooksAPI.getCookbooks().then(c => setCookbooks(c));
+    console.log(cookbooks)
+    // console.log(cookbooks)
+    // setCookbooks(cookbooks);
     // .then(cookbooks => setCookbooks(cookbooks))
   }, [])
 

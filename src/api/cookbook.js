@@ -3,60 +3,10 @@ const REQUEST_HEADERS = {
   mode: 'no-cors'
 }
 
-export function getCookbooks() {
-  /*return [
-    {
-      id: 1,
-      name: 'Cookbook 1'
-    },
-    {
-      id: 2,
-      name: 'Cookbook 2'
-    },
-    {
-      id: 3,
-      name: 'Cookbook 3'
-    }
-  */ 
-const cookbookarray = [
-  {
-    id: 1,
-    name: 'Cookbook 1'
-  },
-  {
-    id: 2,
-    name: 'Cookbook 2'
-  },
-  {
-    id: 3,
-    name: 'Cookbook 3'
-  }]
-
- const response = fetch(`${API_URL}/api/cookbook/get/1`) 
- .then(response => response. json())
- . then(data => {
-  console. log(data)
- })
-  . catch(error => console. error(error))
-        
-        for(var i in response) {
-           cookbookarray.push([i, response[i]])
-           console.log(response[i])
-           
-        }
-  console.log(cookbookarray)
-
-  return cookbookarray
-  
-
-  
-
-
-
-  // })
-
-
-return cookbookarray
+export async function getCookbooks() {
+ return fetch(`${API_URL}/api/cookbook/all`) 
+  .then(response => response.json())
+  .then(data => data)
 }
 
 export function createNewCookbook(name) {
