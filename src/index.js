@@ -21,8 +21,8 @@ root.render(
       <Route path="/" element={<App />}>
         <Route path="cookbooks" element={<Cookbooks />}>
           <Route path=":id" element={<Cookbook />}/>
-          <Route path="new" element={<CookbookForm />}/>
         </Route>
+        <Route path="cookbooks/new" element={<CookbookForm />}/>
         <Route path="mealplans" element = {<Mealplans />}>
           <Route path=":id" element={<Mealplan />}/>
         </Route>
