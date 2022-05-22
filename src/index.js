@@ -12,6 +12,7 @@ import Cookbooks from './cookbook/Cookbooks';
 import CookbookForm from './cookbook/CookbookForm';
 import Mealplan from './mealplan/Mealplan';
 import Mealplans from './mealplan/Mealplans';
+import RecipeForm from './recipe/RecipeForm';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,6 +27,7 @@ root.render(
         <Route path="mealplans" element = {<Mealplans />}>
           <Route path=":id" element={<Mealplan />}/>
         </Route>
+        <Route path="recipes/new" element={<RecipeForm/>}/>
       </Route>
       
     </Routes>

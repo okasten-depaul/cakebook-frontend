@@ -126,3 +126,13 @@ a {
 .u-textLeft {
     text-align: left;
 }
+
+.instructionForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.instructionForm, .instruction {
+    margin-top: 1%;
+}
+

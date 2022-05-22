@@ -5,9 +5,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function CookbookForm() {
-
-  const [cookbook, setCookbook] = useState([])
-  const [newCookbook, setNewCookbook] = useState('')
   const navigate = useNavigate();
 
   const addCookbook = (event) => {
