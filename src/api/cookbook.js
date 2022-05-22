@@ -3,12 +3,6 @@ const REQUEST_HEADERS = {
   mode: 'no-cors'
 }
 
-export async function getCookbooks() {
- return fetch(`${API_URL}/api/cookbook/all`) 
-  .then(response => response.json())
-  .then(data => data)
-}
-
 export function createNewCookbook(name) {
   //placeholder
   //fetch(API_URL).then(r => r.json())
@@ -27,6 +21,33 @@ export function getCookbook(id) {
         author: 'Olivia',
         is_favorite: true,
         is_public: false,
+        instructions: [
+          "Set oven to 350",
+          "That doesn't make any sense for guacamole",
+          "take some avocados",
+          "mash 'em and smash 'em",
+          "onion tomato garlic pepper salt maybe cumin, some jalapeno and some cilantro yummy yummy yummy",
+          "here's another instruction",
+          "taking up more space",
+          "again",
+          "and again",
+          "should this scroll",
+          "probably"
+        ],
+        ingredients: [
+          {
+            id: 1,
+            name: 'avocado',
+            quantity: 3,
+            measurement: null
+          },
+          {
+            id: 2,
+            name: 'garlic',
+            quantity: 2,
+            measurement: 'teaspoon'
+          }
+        ]
       }
     ]
   }

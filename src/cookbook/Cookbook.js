@@ -5,12 +5,16 @@ import Button from 'react-bootstrap/Button';
 import { getCookbook } from '../api/cookbook';
 import Recipe from '../recipe/Recipe';
 
-function Cookbook() { 
+function Cookbook(props) { 
 	const [cookbook, setCookbook] = useState(null);
 	const [recipe, setRecipe] = useState(null);
 
 	useEffect(() => {
-		setCookbook(getCookbook(window.location.pathname.match(/([1-9])+/g)[0]));
+		const cookbookId = window.location.pathname.match(/([1-9])+/g)[0];
+		setCookbook(getCookbook(cookbookId));
+		// fetch(`http://localhost:8080/api/cookbook/all`) //TODO this will need to change
+		//   .then(response => response.json())
+		//   .then(cookbooks => setCookbook(cookbooks[cookbookId - 1]));
 	}, [])
 
 	const cookbookContainer = () => {
@@ -42,10 +46,14 @@ function Cookbook() {
 		)
 	}
 	
+	const updateRecipe = (e) => {
+		console.log(e)
+	}
+
 	return(
 		<div className="sideBySide">
 			{cookbook && cookbookContainer()}
-			{recipe && <Recipe recipe={recipe}/>}
+			{recipe && <Recipe recipe={recipe} updateRecipe={e => updateRecipe(e)}/>}
 		</div>
 		
 	)

@@ -20,14 +20,10 @@ function Cookbooks() {
   }
 
   useEffect(() => {
-    cookbooksAPI.getCookbooks().then(c => setCookbooks(c));
-    console.log(cookbooks)
-    // console.log(cookbooks)
-    // setCookbooks(cookbooks);
-    // .then(cookbooks => setCookbooks(cookbooks))
+    fetch(`http://localhost:8080/api/cookbook/all`) //TODO this is going to have to change to use user
+      .then(response => response.json())
+      .then(data => setCookbooks(data))
   }, [])
-
-  
 
   return (
     <div>
