@@ -1,30 +1,71 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import { Star, StarFill } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button';
 
 function Recipe(props){
-    const recipe = props.recipe;
+    const { recipe, updateRecipe, deleteRecipe } = props;
+    
+    const ingredientList = () => {
+        return recipe.ingredients.map(ing => {
+            return (
+                <li key={ing.id}>
+                    <div>
+                        {ing.name}
+                    </div>
+                    <div>
+                        {ing.quantity} {ing.measurement}
+                    </div>            
+                </li>)
+        })
+    }
 
-    const changePrivacy = () => {
-        //some call to update the recipe
-        console.log("I hit this")
+    const instructionList = () => {
+        return recipe.intstructions.map((instruction, i) => {
+            return (
+                <li key={instruction.id}>
+                    {i}. {instruction}
+                </li>
+            )
+        })
     }
 
     return (
         <div className="rightContainer">
             <h4 className="title">
                 {recipe.name}
-                {recipe.is_favorite ? <StarFill className="star" color={recipe.is_favorite && 'gold'}/> : <Star className="star"/>}
+                {recipe.favorite ? <StarFill onClick={() => updateRecipe({favorite: false})} className="star" color='gold'/> : <Star onClick={() => updateRecipe({favorite: true})} className="star"/>}
                 
             </h4>
             <div className="sideBySide">
                 <div>
-                    <p>Prep Time: {recipe.prep_time}</p>
-                    <p>Cook Time: {recipe.cook_time}</p>
+                    <p>Prep Time: {recipe.prepTime}</p>
+                    <p>Cook Time: {recipe.cookTime}</p>
                 </div>
-                <Button variant="warning" size="sm" onClick={changePrivacy}>Make {recipe.is_public ? 'Private' : 'Public'}</Button>
+                <Button variant="warning" size="sm" onClick={() => updateRecipe({isPublic: !recipe.isPublic})}>Make {recipe.isPublic ? 'Private' : 'Public'}</Button>
             </div>
-            
+            <div className="sideBySide">
+                <div className="internalBox leftContainer">
+                    Ingredients
+                    <ul className="u-textLeft">
+                        {ingredientList()}
+                    </ul>
+                </div>
+                <div className="internalBox rightContainer">
+                    Instructions
+                    <ol className="u-textLeft">
+                        {instructionList()}
+                    </ol>
+                </div>
+            </div>
+            <ButtonToolbar>
+                <ButtonGroup>
+                    <Button variant="danger" onClick={deleteRecipe}>Delete Recipe</Button>
+                </ButtonGroup>
+                <ButtonGroup>
+                    <Button variant="primary">Add to Existing Cookbook</Button>
+                </ButtonGroup>
+            </ButtonToolbar>
         </div>
     )
 }

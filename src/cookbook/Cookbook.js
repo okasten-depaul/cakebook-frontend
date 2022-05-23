@@ -2,15 +2,19 @@ import React, { useState, useEffect } from 'react';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
-import { getCookbook } from '../api/cookbook';
 import Recipe from '../recipe/Recipe';
+import { useNavigate } from 'react-router-dom';
 
 function Cookbook() { 
 	const [cookbook, setCookbook] = useState(null);
 	const [recipe, setRecipe] = useState(null);
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		setCookbook(getCookbook(window.location.pathname.match(/([1-9])+/g)[0]));
+		const cookbookId = parseInt(window.location.pathname.match(/([1-9])+/g)[0]);
+		fetch(`http://localhost:8080/api/cookbook/get/${cookbookId}`)
+		.then(response => response.json())
+		.then(cookbooks => setCookbook(cookbooks.find(cookbook => cookbook.id === cookbookId)))
 	}, [])
 
 	const cookbookContainer = () => {
@@ -31,23 +35,55 @@ function Cookbook() {
 
 	const bottomButtons = () => {
 		return (
-			<ButtonToolbar style={{justifyContent: 'space-around'}}>
+			<ButtonToolbar>
 				<ButtonGroup>
-					<Button variant="primary">Add New Recipe</Button>
+					<Button variant="primary" onClick={() => navigate('/recipes/new', {state: {cookbook: cookbook}})}>Add New Recipe</Button>
 				</ButtonGroup>
 				<ButtonGroup>
-					<Button variant="primary">Add Existing Recipe</Button>
+					<Button variant="primary" onClick={'x'}>Add Existing Recipe</Button>
 				</ButtonGroup>
 			</ButtonToolbar>
 		)
 	}
 	
+	const updateRecipe = (e) => {
+		console.log(e)
+		const newRecipe = {...recipe, ...e};
+		debugger
+		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(newRecipe)
+			}
+		).then(response => response.json())
+		.then(r => setRecipe(newRecipe))
+		
+	}
+
+	const deleteRecipe = (e) => {
+		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
+			{
+				method: 'DELETE'
+			}
+		).then(r => r.json())
+		.then(r => {
+			console.log('deleted')
+			cookbook.recipes = cookbook.recipes.filter(r => recipe.id !== r.id);
+			setCookbook(cookbook);
+			setRecipe(null);
+		})
+
+		
+	}
+
 	return(
 		<div className="sideBySide">
 			{cookbook && cookbookContainer()}
-			{recipe && <Recipe recipe={recipe}/>}
+			{recipe && <Recipe recipe={recipe} updateRecipe={e => updateRecipe(e)} deleteRecipe={deleteRecipe}/>}
 		</div>
-		
 	)
 }
 
