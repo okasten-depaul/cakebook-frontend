@@ -48,6 +48,19 @@ function Cookbook() {
 	
 	const updateRecipe = (e) => {
 		console.log(e)
+		const newRecipe = {...recipe, ...e};
+		debugger
+		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(newRecipe)
+			}
+		).then(response => response.json())
+		.then(r => setRecipe(newRecipe))
+		
 	}
 
 	const deleteRecipe = (e) => {
@@ -56,11 +69,14 @@ function Cookbook() {
 				method: 'DELETE'
 			}
 		).then(r => r.json())
-		.then(console.log('deleted'))
+		.then(r => {
+			console.log('deleted')
+			cookbook.recipes = cookbook.recipes.filter(r => recipe.id !== r.id);
+			setCookbook(cookbook);
+			setRecipe(null);
+		})
 
-		cookbook.recipes = cookbook.recipes.filter(r => recipe.id !== r.id);
-		setCookbook(cookbook);
-		setRecipe(null);
+		
 	}
 
 	return(

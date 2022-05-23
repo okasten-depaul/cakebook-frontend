@@ -60,10 +60,10 @@ function Recipe(props){
             </div>
             <ButtonToolbar>
                 <ButtonGroup>
-                    <Button type="danger" onClick={deleteRecipe}>Delete Recipe</Button>
+                    <Button variant="danger" onClick={deleteRecipe}>Delete Recipe</Button>
                 </ButtonGroup>
                 <ButtonGroup>
-                    <Button type="primary">Add Recipe to Existing Cookbook</Button>
+                    <Button variant="primary">Add to Existing Cookbook</Button>
                 </ButtonGroup>
             </ButtonToolbar>
         </div>
