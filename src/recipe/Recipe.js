@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 function Recipe(props){
     const { recipe, updateRecipe } = props;
-
+    debugger
     const ingredientList = () => {
         return recipe.ingredients.map(ing => {
             return (
@@ -33,15 +33,15 @@ function Recipe(props){
         <div className="rightContainer">
             <h4 className="title">
                 {recipe.name}
-                {recipe.is_favorite ? <StarFill onClick={() => updateRecipe({is_favorite: false})} className="star" color='gold'/> : <Star onClick={() => updateRecipe({is_favorite: true})} className="star"/>}
+                {recipe.favorite ? <StarFill onClick={() => updateRecipe({favorite: false})} className="star" color='gold'/> : <Star onClick={() => updateRecipe({favorite: true})} className="star"/>}
                 
             </h4>
             <div className="sideBySide">
                 <div>
-                    <p>Prep Time: {recipe.prep_time}</p>
-                    <p>Cook Time: {recipe.cook_time}</p>
+                    <p>Prep Time: {recipe.prepTime}</p>
+                    <p>Cook Time: {recipe.cookTime}</p>
                 </div>
-                <Button variant="warning" size="sm" onClick={() => updateRecipe({is_public: !recipe.is_public})}>Make {recipe.is_public ? 'Private' : 'Public'}</Button>
+                <Button variant="warning" size="sm" onClick={() => updateRecipe({isPublic: !recipe.isPublic})}>Make {recipe.isPublic ? 'Private' : 'Public'}</Button>
             </div>
             <div className="sideBySide">
                 <div className="internalBox leftContainer">

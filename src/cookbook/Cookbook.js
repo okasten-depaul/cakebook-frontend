@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
-import { getCookbook } from '../api/cookbook';
 import Recipe from '../recipe/Recipe';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,7 +28,6 @@ function Cookbook() {
 	}
 
 	const recipeList = () => {
-		debugger
 		return cookbook.recipes.map(recipe => {
 			return <h5 onClick={() => setRecipe(recipe)} key={recipe.id} className="title">{recipe.name}</h5>
 		})

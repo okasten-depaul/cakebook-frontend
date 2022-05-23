@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import * as cookbooksAPI from "../api/cookbook";
 
 function Cookbooks() {
   const [cookbooks, setCookbooks] = useState([]);
