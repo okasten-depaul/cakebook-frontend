@@ -6,17 +6,16 @@ import { getCookbook } from '../api/cookbook';
 import Recipe from '../recipe/Recipe';
 import { useNavigate } from 'react-router-dom';
 
-function Cookbook(props) { 
+function Cookbook() { 
 	const [cookbook, setCookbook] = useState(null);
 	const [recipe, setRecipe] = useState(null);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const cookbookId = window.location.pathname.match(/([1-9])+/g)[0];
-		setCookbook(getCookbook(cookbookId));
-		// fetch(`http://localhost:8080/api/cookbook/all`) //TODO this will need to change
-		//   .then(response => response.json())
-		//   .then(cookbooks => setCookbook(cookbooks[cookbookId - 1]));
+		const cookbookId = parseInt(window.location.pathname.match(/([1-9])+/g)[0]);
+		fetch(`http://localhost:8080/api/cookbook/get/${cookbookId}`)
+		.then(response => response.json())
+		.then(cookbooks => setCookbook(cookbooks.find(cookbook => cookbook.id === cookbookId)))
 	}, [])
 
 	const cookbookContainer = () => {
@@ -30,6 +29,7 @@ function Cookbook(props) {
 	}
 
 	const recipeList = () => {
+		debugger
 		return cookbook.recipes.map(recipe => {
 			return <h5 onClick={() => setRecipe(recipe)} key={recipe.id} className="title">{recipe.name}</h5>
 		})

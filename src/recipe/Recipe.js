@@ -20,7 +20,7 @@ function Recipe(props){
     }
 
     const instructionList = () => {
-        return recipe.instructions.map((instruction, i) => {
+        return recipe.intstructions.map((instruction, i) => {
             return (
                 <li key={instruction.id}>
                     {i}. {instruction}

@@ -2,10 +2,12 @@ import { PlusCircle } from 'react-bootstrap-icons';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 function RecipeForm() {
     const [instructions, setInstructions] = useState({1: ''})
     let recipe = {name: '', cookTime: '', prepTime: '', instructions: []};
+    const navigate = useNavigate();
 
     const createRecipe = (e) => {
         e.preventDefault();
@@ -29,7 +31,6 @@ function RecipeForm() {
 
     const addInstruction = (e) => {
         const newIndex = Object.keys(instructions).length + 1;
-        debugger
         setInstructions({...instructions, [newIndex]: `Step ${newIndex}`})
     }
 
@@ -53,7 +54,7 @@ function RecipeForm() {
                     {instructionsList()}
                     <PlusCircle onClick={addInstruction} style={{marginLeft: '100%'}}/>
                 </div>
-
+                <Button variant="danger" onClick={() => navigate(-1)}>Discard</Button>
                 <Button variant="primary" type="submit">Save</Button>
                 
             </Form>
