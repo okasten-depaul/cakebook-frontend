@@ -1,10 +1,11 @@
 import React from 'react';
+import { ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import { Star, StarFill } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button';
 
 function Recipe(props){
-    const { recipe, updateRecipe } = props;
-    debugger
+    const { recipe, updateRecipe, deleteRecipe } = props;
+    
     const ingredientList = () => {
         return recipe.ingredients.map(ing => {
             return (
@@ -57,6 +58,14 @@ function Recipe(props){
                     </ol>
                 </div>
             </div>
+            <ButtonToolbar>
+                <ButtonGroup>
+                    <Button type="danger" onClick={deleteRecipe}>Delete Recipe</Button>
+                </ButtonGroup>
+                <ButtonGroup>
+                    <Button type="primary">Add Recipe to Existing Cookbook</Button>
+                </ButtonGroup>
+            </ButtonToolbar>
         </div>
     )
 }

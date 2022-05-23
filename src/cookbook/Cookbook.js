@@ -35,12 +35,12 @@ function Cookbook() {
 
 	const bottomButtons = () => {
 		return (
-			<ButtonToolbar style={{justifyContent: 'space-around'}}>
+			<ButtonToolbar>
 				<ButtonGroup>
-					<Button variant="primary" onClick={() => navigate('/recipes/new', {cookbookId: cookbook.id})}>Add New Recipe</Button>
+					<Button variant="primary" onClick={() => navigate('/recipes/new', {state: {cookbook: cookbook}})}>Add New Recipe</Button>
 				</ButtonGroup>
 				<ButtonGroup>
-					<Button variant="primary">Add Existing Recipe</Button>
+					<Button variant="primary" onClick={'x'}>Add Existing Recipe</Button>
 				</ButtonGroup>
 			</ButtonToolbar>
 		)
@@ -50,12 +50,24 @@ function Cookbook() {
 		console.log(e)
 	}
 
+	const deleteRecipe = (e) => {
+		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
+			{
+				method: 'DELETE'
+			}
+		).then(r => r.json())
+		.then(console.log('deleted'))
+
+		cookbook.recipes = cookbook.recipes.filter(r => recipe.id !== r.id);
+		setCookbook(cookbook);
+		setRecipe(null);
+	}
+
 	return(
 		<div className="sideBySide">
 			{cookbook && cookbookContainer()}
-			{recipe && <Recipe recipe={recipe} updateRecipe={e => updateRecipe(e)}/>}
+			{recipe && <Recipe recipe={recipe} updateRecipe={e => updateRecipe(e)} deleteRecipe={deleteRecipe}/>}
 		</div>
-		
 	)
 }
 
