@@ -12,9 +12,12 @@ function Cookbook() {
 
 	useEffect(() => {
 		const cookbookId = parseInt(window.location.pathname.match(/([1-9])+/g)[0]);
-		fetch(`http://localhost:8080/api/cookbook/get/${cookbookId}`)
+		fetch(`http://localhost:8080/api/cookbook/get/1`)
 		.then(response => response.json())
-		.then(cookbooks => setCookbook(cookbooks.find(cookbook => cookbook.id === cookbookId)))
+		.then(cookbooks => {
+			if(cookbooks !== null)
+				setCookbook(cookbooks.find(cookbook => cookbook.id === cookbookId))
+		})
 	}, [])
 
 	const cookbookContainer = () => {

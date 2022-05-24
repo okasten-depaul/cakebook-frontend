@@ -22,8 +22,15 @@ function RecipeForm() {
             recipe['instructions'].push(e.target[i].value)
         }
         recipe['cookbookId'] = cookbook.id;
-        console.log(recipe);
-
+        
+        fetch(`http://localhost:8080/api/recipes/new/${cookbook.id}`,
+            {
+                method: 'POST',
+                'Content-Type': 'application/json',
+                body: JSON.stringify(recipe)
+            }
+        ).then(r => r.json())
+        .then(() => navigate(-1))
     }
 
     const instructionsList = () => {
@@ -45,19 +52,20 @@ function RecipeForm() {
             <Form onSubmit={createRecipe} className="formInput">
                 <Form.Label>Recipe Name</Form.Label>
                 <Form.Control type="text" placeholder="" key="recipeName"/>
-                <div>
+                <div className="leftContainer">
                     <Form.Label>Cook Time</Form.Label>
                     <Form.Control type="text" placeholder="" key="cookTime" />
                     <Form.Label>Prep Time</Form.Label>
                     <Form.Control type="text" placeholder="" key="prepTime"/>
                 </div>
-                <div>
-                    Instructions
-                </div>
-                
-                <div className="instructionForm">
-                    {instructionsList()}
-                    <PlusCircle onClick={addInstruction} style={{marginLeft: '100%'}}/>
+                <div className="leftContainer">
+                    <div>
+                        Instructions
+                    </div>
+                    <div className="instructionForm">
+                        {instructionsList()}
+                        <PlusCircle onClick={addInstruction} style={{marginLeft: '100%'}}/>
+                    </div>
                 </div>
                 <ButtonToolbar>
                     <ButtonGroup>
