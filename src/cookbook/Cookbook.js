@@ -52,7 +52,6 @@ function Cookbook() {
 	const updateRecipe = (e) => {
 		console.log(e)
 		const newRecipe = {...recipe, ...e};
-		debugger
 		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
 			{
 				method: 'PUT',

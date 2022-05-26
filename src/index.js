@@ -27,6 +27,7 @@ root.render(
           <Route path=":id" element={<Mealplan />}/>
         </Route>
         <Route path="recipes/new" element={<RecipeForm/>}/>
+        <Route path="recipes/edit/:id" element={<RecipeForm/>}/>
       </Route>
       
     </Routes>
