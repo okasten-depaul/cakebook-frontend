@@ -1,4 +1,3 @@
-import { PlusCircle } from 'react-bootstrap-icons';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
@@ -6,15 +5,16 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { useNavigate, useLocation } from 'react-router-dom';
 import InstructionModal from './InstructionModal';
+import IngredientModal from './IngredientModal';
 
 function RecipeForm() {
-    const [instructions, setInstructions] = useState({1: ''})
+    const [instructions, setInstructions] = useState(['Step 1']);
     const [instructionModal, setInstructionModal] = useState(false);
-    const [ingredients, setIngredients] = useState({name: '', quantity: ''})
+    const [ingredients, setIngredients] = useState([{name: '', quantity: '', measurement: ''}])
     const [ingredientsModal, setIngredientsModal] = useState(false);
 
 
-    let recipe = {name: '', cookTime: '', prepTime: '', instructions: []};
+    let recipe = {name: '', cookTime: '', prepTime: '', instructions: [], ingredients: []};
     const navigate = useNavigate();
     const location = useLocation();
     const cookbook = location.state.cookbook
@@ -53,16 +53,12 @@ function RecipeForm() {
                         <Form.Control type="text" placeholder="" key="prepTime"/>
                     </span>
                     <ButtonToolbar>
-                        <ButtonGroup>
-                            <Button onClick={() => setInstructionModal(true)}>
-                                Add Instructions
-                            </Button>
-                        </ButtonGroup>
-                        <ButtonGroup>
-                            <Button onClick={() => setIngredientsModal(true)}>
-                                Add Ingredients
-                            </Button>
-                        </ButtonGroup>
+                        <Button onClick={() => setInstructionModal(true)}>
+                            Add Instructions
+                        </Button>
+                        <Button onClick={() => setIngredientsModal(true)}>
+                            Add Ingredients
+                        </Button>
                     </ButtonToolbar>
                     
                     <ButtonToolbar>
@@ -77,6 +73,7 @@ function RecipeForm() {
             </div>
 
             {instructionModal && <InstructionModal setInstructionModal={setInstructionModal} instructions={instructions} setInstructionsList={(instructions) => setInstructions(instructions)}/>}
+            {ingredientsModal && <IngredientModal setIngredientModal={setIngredientsModal} ingredients={ingredients} setIngredientsList={(ingredients) => setIngredients(ingredients)}/>}
         </div>
     )
 }

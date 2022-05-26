@@ -7,43 +7,58 @@ import { PlusCircle } from 'react-bootstrap-icons';
 function InstructionModal(props){
 
     const instructionsList = () => {
-        return Object.keys(props.instructions).map(num => {
+        return props.instructions.map((instruction, i) => {
             return (
-                <Form.Control key={num} type="text" placeholder={`Step ${num}`} className="instruction"/>
+                <Form.Control key={i} type="text" placeholder={instruction || `Step ${i + 1}`} className="instruction"/>
             )
         })
     }
 
     const addInstruction = (e) => {
-        const newIndex = Object.keys(props.instructions).length + 1;
-        props.setInstructionsList({...props.instructions, [newIndex]: `Step ${newIndex}`})
+        const instructions = e.target
+        let newList = [];
+        for(let i = 0; i < instructions.length - 2; i++)
+            newList.push(e.target[i].value);
+
+        props.setInstructionsList(newList);
+        
+    }
+
+    const addNewLine = () => {
+        const newIndex = props.instructions.length + 1;
+        props.setInstructionsList([...props.instructions, `Step ${newIndex}`]);
     }
 
     const handleClose = () => {
-        props.setInstructionsList({1: ''});
+        props.setInstructionModal(false);
+    }
+
+    const handleSave = (e) => {
+        e.preventDefault();
+        addInstruction(e);
         props.setInstructionModal(false);
     }
 
     return (
-        <Modal.Dialog size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
-            <Modal.Header>
-                <Modal.Title id="contained-modal-title-vcenter">Instructions</Modal.Title>
-            </Modal.Header>
+        <Form onSubmit={handleSave}>
+            <Modal.Dialog size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+                <Modal.Header>
+                    <Modal.Title id="contained-modal-title-vcenter">Instructions</Modal.Title>
+                </Modal.Header>
 
-            <Modal.Body>
-                <Form>
+                <Modal.Body>
                     {instructionsList()}
                     <div className="instructionForm">
-                        <PlusCircle onClick={addInstruction} style={{marginLeft: '100%'}}/>
+                        <PlusCircle onClick={addNewLine} style={{marginLeft: '100%'}}/>
                     </div>
-                </Form>
-            </Modal.Body>
+                </Modal.Body>
 
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>Close</Button>
-                <Button variant="primary" onClick={() => props.setInstructionModal(false)}>Save changes</Button>
-            </Modal.Footer>
-        </Modal.Dialog>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>Close</Button>
+                    <Button variant="primary" type="submit">Save changes</Button>
+                </Modal.Footer>
+            </Modal.Dialog>
+        </Form>
     )
 }
 
