@@ -69,16 +69,16 @@ function Cookbook() {
 	const deleteRecipe = (e) => {
 		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
 			{
-				method: 'DELETE'
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				}
 			}
-		).then(r => r.json())
-		.then(r => {
-			console.log('deleted')
+		).then(r => {
 			cookbook.recipes = cookbook.recipes.filter(r => recipe.id !== r.id);
 			setCookbook(cookbook);
 			setRecipe(null);
 		})
-
 		
 	}
 
