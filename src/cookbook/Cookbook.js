@@ -12,9 +12,12 @@ function Cookbook() {
 
 	useEffect(() => {
 		const cookbookId = parseInt(window.location.pathname.match(/([1-9])+/g)[0]);
-		fetch(`http://localhost:8080/api/cookbook/get/${cookbookId}`)
+		fetch(`http://localhost:8080/api/cookbook/get/1`)
 		.then(response => response.json())
-		.then(cookbooks => setCookbook(cookbooks.find(cookbook => cookbook.id === cookbookId)))
+		.then(cookbooks => {
+			if(cookbooks !== null)
+				setCookbook(cookbooks.find(cookbook => cookbook.id === cookbookId))
+		})
 	}, [])
 
 	const cookbookContainer = () => {
@@ -49,7 +52,6 @@ function Cookbook() {
 	const updateRecipe = (e) => {
 		console.log(e)
 		const newRecipe = {...recipe, ...e};
-		debugger
 		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
 			{
 				method: 'PUT',
@@ -66,16 +68,16 @@ function Cookbook() {
 	const deleteRecipe = (e) => {
 		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
 			{
-				method: 'DELETE'
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				}
 			}
-		).then(r => r.json())
-		.then(r => {
-			console.log('deleted')
+		).then(r => {
 			cookbook.recipes = cookbook.recipes.filter(r => recipe.id !== r.id);
 			setCookbook(cookbook);
 			setRecipe(null);
 		})
-
 		
 	}
 

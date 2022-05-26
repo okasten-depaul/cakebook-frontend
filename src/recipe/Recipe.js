@@ -2,9 +2,11 @@ import React from 'react';
 import { ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import { Star, StarFill } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 function Recipe(props){
     const { recipe, updateRecipe, deleteRecipe } = props;
+    const navigate = useNavigate();
     
     const ingredientList = () => {
         return recipe.ingredients.map(ing => {
@@ -21,13 +23,17 @@ function Recipe(props){
     }
 
     const instructionList = () => {
-        return recipe.intstructions.map((instruction, i) => {
+        return recipe.instructions.map((instruction, i) => {
             return (
                 <li key={instruction.id}>
-                    {i}. {instruction}
+                    {i + 1}. {instruction.instruction}
                 </li>
             )
         })
+    }
+
+    const editRecipe = () => {
+        navigate(`/recipes/edit/${recipe.id}`, {state: {recipe: recipe}})
     }
 
     return (
@@ -63,7 +69,7 @@ function Recipe(props){
                     <Button variant="danger" onClick={deleteRecipe}>Delete Recipe</Button>
                 </ButtonGroup>
                 <ButtonGroup>
-                    <Button variant="primary">Add to Existing Cookbook</Button>
+                    <Button variant="primary" onClick={editRecipe}>Edit Recipe</Button>
                 </ButtonGroup>
             </ButtonToolbar>
         </div>
