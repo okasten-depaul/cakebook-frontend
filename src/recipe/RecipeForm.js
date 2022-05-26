@@ -5,9 +5,15 @@ import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { useNavigate, useLocation } from 'react-router-dom';
+import InstructionModal from './InstructionModal';
 
 function RecipeForm() {
     const [instructions, setInstructions] = useState({1: ''})
+    const [instructionModal, setInstructionModal] = useState(false);
+    const [ingredients, setIngredients] = useState({name: '', quantity: ''})
+    const [ingredientsModal, setIngredientsModal] = useState(false);
+
+
     let recipe = {name: '', cookTime: '', prepTime: '', instructions: []};
     const navigate = useNavigate();
     const location = useLocation();
@@ -33,51 +39,44 @@ function RecipeForm() {
         .then(() => navigate(-1))
     }
 
-    const instructionsList = () => {
-        return Object.keys(instructions).map(num => {
-            return (
-                <Form.Control key={num} type="text" placeholder={`Step ${num}`} className="instruction"/>
-            )
-        })
-    }
-
-    const addInstruction = (e) => {
-        const newIndex = Object.keys(instructions).length + 1;
-        setInstructions({...instructions, [newIndex]: `Step ${newIndex}`})
-    }
-
     return (
-        <div className="centerContainer">
-            <h4 className="title">Create a New Recipe</h4>
-            <Form onSubmit={createRecipe} className="formInput">
-                <Form.Label>Recipe Name</Form.Label>
-                <Form.Control type="text" placeholder="" key="recipeName"/>
-                <div className="leftContainer">
-                    <Form.Label>Cook Time</Form.Label>
-                    <Form.Control type="text" placeholder="" key="cookTime" />
-                    <Form.Label>Prep Time</Form.Label>
-                    <Form.Control type="text" placeholder="" key="prepTime"/>
-                </div>
-                <div className="leftContainer">
-                    <div>
-                        Instructions
-                    </div>
-                    <div className="instructionForm">
-                        {instructionsList()}
-                        <PlusCircle onClick={addInstruction} style={{marginLeft: '100%'}}/>
-                    </div>
-                </div>
-                <ButtonToolbar>
-                    <ButtonGroup>
-                        <Button variant="danger" onClick={() => navigate(-1)}>Discard</Button>
-                    </ButtonGroup>
-                    <ButtonGroup>
-                        <Button variant="primary" type="submit">Save to {cookbook.name}</Button>
-                    </ButtonGroup>
-                </ButtonToolbar>
-                
-            </Form>
+        <div>
+            <div className="centerContainer">
+                <h4 className="title">Create a New Recipe</h4>
+                <Form onSubmit={createRecipe} className="formInput">
+                    <Form.Label>Recipe Name</Form.Label>
+                    <Form.Control type="text" placeholder="" key="recipeName"/>
+                    <span className="leftContainer">
+                        <Form.Label>Cook Time</Form.Label>
+                        <Form.Control type="text" placeholder="" key="cookTime" />
+                        <Form.Label>Prep Time</Form.Label>
+                        <Form.Control type="text" placeholder="" key="prepTime"/>
+                    </span>
+                    <ButtonToolbar>
+                        <ButtonGroup>
+                            <Button onClick={() => setInstructionModal(true)}>
+                                Add Instructions
+                            </Button>
+                        </ButtonGroup>
+                        <ButtonGroup>
+                            <Button onClick={() => setIngredientsModal(true)}>
+                                Add Ingredients
+                            </Button>
+                        </ButtonGroup>
+                    </ButtonToolbar>
+                    
+                    <ButtonToolbar>
+                        <ButtonGroup>
+                            <Button variant="danger" onClick={() => navigate(-1)}>Discard</Button>
+                        </ButtonGroup>
+                        <ButtonGroup>
+                            <Button variant="primary" type="submit">Save to {cookbook.name}</Button>
+                        </ButtonGroup>
+                    </ButtonToolbar>
+                </Form>
+            </div>
 
+            {instructionModal && <InstructionModal setInstructionModal={setInstructionModal} instructions={instructions} setInstructionsList={(instructions) => setInstructions(instructions)}/>}
         </div>
     )
 }
