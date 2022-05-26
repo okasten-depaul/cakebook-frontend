@@ -24,15 +24,15 @@ function RecipeForm() {
         recipe['name'] = e.target[0].value;
         recipe['cookTime'] = e.target[1].value;
         recipe['prepTime'] = e.target[2].value;
-        for(let i = 3; i < e.target.length - 1; i++){
-            recipe['instructions'].push(e.target[i].value)
-        }
-        recipe['cookbookId'] = cookbook.id;
-        
+        recipe['instructions'] = instructions;
+        recipe['ingredients'] = ingredients;
+        debugger
         fetch(`http://localhost:8080/api/recipes/new/${cookbook.id}`,
             {
                 method: 'POST',
-                'Content-Type': 'application/json',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(recipe)
             }
         ).then(r => r.json())
