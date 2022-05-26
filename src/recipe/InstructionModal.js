@@ -9,16 +9,16 @@ function InstructionModal(props){
     const instructionsList = () => {
         return props.instructions.map((instruction, i) => {
             return (
-                <Form.Control key={i} type="text" placeholder={instruction || `Step ${i + 1}`} className="instruction"/>
+                <Form.Control key={i} type="text" placeholder={instruction.instruction || `Step ${i + 1}`} className="instruction"/>
             )
         })
     }
 
     const addInstruction = (e) => {
-        const instructions = e.target
+        const newInstructions = e.target
         let newList = [];
-        for(let i = 0; i < instructions.length - 2; i++)
-            newList.push(e.target[i].value);
+        for(let i = 0; i < newInstructions.length - 2; i++)
+            newList.push({instruction: e.target[i].value});
 
         props.setInstructionsList(newList);
         
@@ -26,7 +26,7 @@ function InstructionModal(props){
 
     const addNewLine = () => {
         const newIndex = props.instructions.length + 1;
-        props.setInstructionsList([...props.instructions, `Step ${newIndex}`]);
+        props.setInstructionsList([...props.instructions, {instruction: `Step ${newIndex}`}]);
     }
 
     const handleClose = () => {

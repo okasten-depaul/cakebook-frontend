@@ -8,10 +8,18 @@ import InstructionModal from './InstructionModal';
 import IngredientModal from './IngredientModal';
 
 function RecipeForm() {
-    const [instructions, setInstructions] = useState(['Step 1']);
+    const [instructions, setInstructions] = useState([{instruction: 'Step 1'}]);
     const [instructionModal, setInstructionModal] = useState(false);
     const [ingredients, setIngredients] = useState([{name: '', quantity: '', measurement: ''}])
     const [ingredientsModal, setIngredientsModal] = useState(false);
+
+    const modifyRecipe = () => {
+        if(recipe.ingredients.length == 1 && recipe.ingredients[0].quantity === "")
+            recipe.ingredients = [];
+
+        if(recipe.instructions.length == 1 && recipe.instructions[0].instruction === 'Step 1')
+            recipe.instructions = [];
+    }
 
 
     let recipe = {name: '', cookTime: '', prepTime: '', instructions: [], ingredients: []};
@@ -26,7 +34,8 @@ function RecipeForm() {
         recipe['prepTime'] = e.target[2].value;
         recipe['instructions'] = instructions;
         recipe['ingredients'] = ingredients;
-        debugger
+        modifyRecipe();
+        
         fetch(`http://localhost:8080/api/recipes/new/${cookbook.id}`,
             {
                 method: 'POST',
@@ -35,8 +44,7 @@ function RecipeForm() {
                 },
                 body: JSON.stringify(recipe)
             }
-        ).then(r => r.json())
-        .then(() => navigate(-1))
+        ).then(r => navigate(-1))
     }
 
     return (
