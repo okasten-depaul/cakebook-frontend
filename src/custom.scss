@@ -34,6 +34,11 @@ $font-family-sans-serif: Mate;
 
 @import '~bootstrap/scss/bootstrap.scss';
 
+.container, .header {
+    max-width: 100%;
+    padding: 0%;
+}
+
 .centerContainer {
     display: flex;
     flex-direction: column;

@@ -3,10 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button"
 import * as mealplansAPI from "../api/mealplan"
-import { NavLink } from "react-bootstrap";
-import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 import { useSelector } from 'react-redux'
 
 function Header() {
@@ -51,20 +48,22 @@ function Header() {
 
   return(
     <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="/">Cakebook</Navbar.Brand>
+      <Container className="header">
+        <Navbar.Brand href="/" style={{marginLeft: '1rem'}}>Cakebook</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-          <NavDropdown title="My Cookbooks" id="basic-nav-dropdown">
-            {cookbookDropdownItems()}
-          </NavDropdown>
-          <NavDropdown title = "Mealplans" id = "basic-nav-dropdown">
-            {mealPlanDropdownItems()}
-          </NavDropdown>
-        <Navbar.Toggle />
-       
-        </Nav>
+          <Nav className="me-auto">
+            <NavDropdown title="My Cookbooks" id="basic-nav-dropdown">
+              {cookbookDropdownItems()}
+            </NavDropdown>
+            <NavDropdown title = "Mealplans" id = "basic-nav-dropdown">
+              {mealPlanDropdownItems()}
+            </NavDropdown>
+            <Navbar.Toggle />
+            <Nav.Item>
+              <Nav.Link href="/search">Search All Recipes</Nav.Link>
+            </Nav.Item>
+          </Nav>
         </Navbar.Collapse>
       </Container>
       <Navbar.Collapse className = "justify-content-end" >
