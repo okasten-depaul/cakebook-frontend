@@ -3,11 +3,15 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button"
 import * as mealplansAPI from "../api/mealplan"
+import { NavLink } from "react-bootstrap";
+import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
+import { useSelector } from 'react-redux'
 
 function Header() {
   const [cookbooks, setCookbooks] = useState([]);
-
+  const userInformation = useSelector((store) => store.userInformation)
   useEffect(() => {
     fetch(`http://localhost:8080/api/cookbook/all`) //TODO this is going to have to change to use user
       .then(response => response.json())
@@ -43,6 +47,7 @@ function Header() {
   
     return dropdownItems;
   }
+  
 
   return(
     <Navbar bg="light" expand="lg">
@@ -57,9 +62,24 @@ function Header() {
           <NavDropdown title = "Mealplans" id = "basic-nav-dropdown">
             {mealPlanDropdownItems()}
           </NavDropdown>
+        <Navbar.Toggle />
+       
         </Nav>
         </Navbar.Collapse>
       </Container>
+      <Navbar.Collapse className = "justify-content-end" >
+          <Nav >
+          {!Object.keys(userInformation).length ? (
+                        <>
+                            <Nav.Link href="/login">Login</Nav.Link>
+                            <span>/</span>
+                            <Nav.Link href="/sign-up">Sign Up</Nav.Link>
+                        </>
+                    ) : (
+                        <span>Welcome, {userInformation.username}!</span>
+                    )}
+          </Nav>
+        </Navbar.Collapse>
     </Navbar>
   )
 }
