@@ -1,6 +1,5 @@
 import Header from './components/Header.js';
 import Homepage from './homepage/Homepage.js';
-import { Outlet } from 'react-router-dom';
 import Cookbook from './cookbook/Cookbook';
 import Cookbooks from './cookbook/Cookbooks'; 
 import CookbookForm from './cookbook/CookbookForm';
@@ -11,8 +10,8 @@ import RecipeForm from './recipe/RecipeForm';
 import SignupForm from './user/SignupForm';
 import LoginForm from './user/LoginForm';
 import Container from 'react-bootstrap/Container'
+import SearchContainer from './search/SearchContainer';
 import {
-  BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
@@ -33,7 +32,7 @@ function App() {
         <Route path="recipes/edit/:id" element={<RecipeForm/>}/>
         <Route path="sign-up" element = {<SignupForm />}/>
         <Route path="login" element = {<LoginForm />}/>
-      
+        <Route path="search" element={<SearchContainer />}/>
       </Routes>
     </Container>
   );

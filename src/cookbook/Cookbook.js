@@ -52,6 +52,7 @@ function Cookbook() {
 	const updateRecipe = (e) => {
 		console.log(e)
 		const newRecipe = {...recipe, ...e};
+		debugger
 		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
 			{
 				method: 'PUT',
@@ -60,9 +61,7 @@ function Cookbook() {
 				},
 				body: JSON.stringify(newRecipe)
 			}
-		).then(response => response.json())
-		.then(r => setRecipe(newRecipe))
-		
+		).then(response => setRecipe(newRecipe))
 	}
 
 	const deleteRecipe = (e) => {
