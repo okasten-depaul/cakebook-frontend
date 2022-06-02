@@ -1,3 +1,4 @@
+import { prop } from 'ramda';
 import React from 'react';
 import { ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import { Star, StarFill } from 'react-bootstrap-icons';
@@ -64,14 +65,16 @@ function Recipe(props){
                     </ol>
                 </div>
             </div>
-            <ButtonToolbar>
-                <ButtonGroup>
-                    <Button variant="danger" onClick={deleteRecipe}>Delete Recipe</Button>
-                </ButtonGroup>
-                <ButtonGroup>
-                    <Button variant="primary" onClick={editRecipe}>Edit Recipe</Button>
-                </ButtonGroup>
-            </ButtonToolbar>
+            {!props.fromSearch && 
+                <ButtonToolbar>
+                    <ButtonGroup>
+                        <Button variant="danger" onClick={deleteRecipe}>Delete Recipe</Button>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                        <Button variant="primary" onClick={editRecipe}>Edit Recipe</Button>
+                    </ButtonGroup>
+                </ButtonToolbar>
+            }
         </div>
     )
 }

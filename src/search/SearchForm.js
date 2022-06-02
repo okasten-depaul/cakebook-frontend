@@ -14,7 +14,7 @@ function SearchForm(props) {
 
     return (
         <div className="searchForm">
-            <Form onSubmit={(e) => props.handleSearch(form)} className="formInput" style={{margin: '1rem 0 0 2rem'}}>
+            <Form onSubmit={(e) => props.handleSearch(e, form)} className="formInput" style={{margin: '1rem 0 0 2rem'}}>
                 <Row className="mb-3">
                     <Form.Group as={Col}>
                         <Form.Control type="text" name="name" placeholder="Recipe Name" value={form.name} onChange={handleChange}/>
