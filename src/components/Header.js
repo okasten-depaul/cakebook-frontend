@@ -5,6 +5,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import * as mealplansAPI from "../api/mealplan"
 import { useSelector } from 'react-redux'
+import { Search } from 'react-bootstrap-icons';
 
 function Header() {
   const [cookbooks, setCookbooks] = useState([]);
@@ -61,7 +62,7 @@ function Header() {
             </NavDropdown>
             <Navbar.Toggle />
             <Nav.Item>
-              <Nav.Link href="/search">Search All Recipes</Nav.Link>
+              <Nav.Link href="/search"><Search/>Search All Recipes</Nav.Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>

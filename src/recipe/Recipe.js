@@ -41,15 +41,16 @@ function Recipe(props){
         <div className="rightContainer">
             <h4 className="title">
                 {recipe.name}
-                {recipe.favorite ? <StarFill onClick={() => updateRecipe({favorite: false})} className="star" color='gold'/> : <Star onClick={() => updateRecipe({favorite: true})} className="star"/>}
-                
+                {!props.fromSearch &&
+                 (recipe.favorite ? <StarFill onClick={() => updateRecipe({favorite: false})} className="star" color='gold'/> : <Star onClick={() => updateRecipe({favorite: true})} className="star"/>)
+                }
             </h4>
             <div className="sideBySide">
                 <div>
                     <p>Prep Time: {recipe.prepTime}</p>
                     <p>Cook Time: {recipe.cookTime}</p>
                 </div>
-                <Button variant="warning" size="sm" onClick={() => updateRecipe({isPublic: !recipe.isPublic})}>Make {recipe.isPublic ? 'Private' : 'Public'}</Button>
+                {!props.fromSearch && <Button variant="warning" size="sm" onClick={() => updateRecipe({isPublic: !recipe.isPublic})}>Make {recipe.isPublic ? 'Private' : 'Public'}</Button>}
             </div>
             <div className="sideBySide">
                 <div className="internalBox leftContainer">
@@ -73,6 +74,11 @@ function Recipe(props){
                     <ButtonGroup>
                         <Button variant="primary" onClick={editRecipe}>Edit Recipe</Button>
                     </ButtonGroup>
+                </ButtonToolbar>
+            }
+            {props.fromSearch &&
+                <ButtonToolbar>
+                    <Button variant="primary">Add to Existing Cookbook</Button>
                 </ButtonToolbar>
             }
         </div>
