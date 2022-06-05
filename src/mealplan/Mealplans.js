@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import * as mealplansAPI from "../api/mealplan";
+import {  useSelector } from 'react-redux'
 
 function Mealplans() {
   const [mealplans, setMealplans] = useState([]);
-  const isIndex = window.location.pathname === "/mealplans";
+ 
+  const userInformation = useSelector((store) => store.userInformation)
+  console.log(userInformation.id)
 
   const createMealplansList = () => {
-    return mealplans.map(mealplan => <a href={`${mealplan.id}`} className="centerItem" key={mealplan.id}>{mealplan.week}</a>)
+    return mealplans.map(mealplan => <a href={`/mealplans/${mealplan.id}`} className="centerItem" key={mealplan.id}>{mealplan.name}</a>)
   }
 
-  const indexPage = () => {
-    return(
-      <div className="centerContainer mealplanIndex">
-        <h1 className="title">My Mealplans</h1>
-        {createMealplansList()}
-      </div>
-    )
-  }
 
   useEffect(() => {
-    const mealplans = mealplansAPI.getMealplans();
-    setMealplans(mealplans);
-    // .then(mealplans => setMealplans(mealplans))
+    fetch(`http://localhost:8080/api/mealplan/get/${userInformation.id}`)
+    .then(response => response.json())
+    .then(data => setMealplans(data))
+    console.log(mealplans)
+   
   }, [])
 
   return (
-    <div>
-      {isIndex ? indexPage() : <Outlet/>}
+    <div className="centerContainer cookbookIndex">
+      <h1 className="title">My Mealplans</h1>
+      {createMealplansList()}
     </div>
     
   )

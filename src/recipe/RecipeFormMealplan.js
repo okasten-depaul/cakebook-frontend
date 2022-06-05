@@ -7,10 +7,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import InstructionModal from './InstructionModal';
 import IngredientModal from './IngredientModal';
 
-function RecipeForm() {
+function RecipeFormMealplan() {
     const navigate = useNavigate();
     const location = useLocation();
-    const cookbook = location.state && location.state.cookbook;
+    const mealplan = location.state && location.state.mealplan;
     const isEdit = !!location.state.recipe;
 
     const [recipe, setRecipe] = useState(location.state.recipe || {name: '', cookTime: '', prepTime: '', instructions: [{instruction: 'Step 1'}], ingredients: [{name: '', quantity: '', measurement: ''}]});
@@ -22,7 +22,7 @@ function RecipeForm() {
 
     const createRecipe = (e) => {
         e.preventDefault();
-
+        debugger
         const newRecipe = {...recipe, instructions: instructions, ingredients: ingredients};
         if(newRecipe.ingredients.length == 1 && newRecipe.ingredients[0].quantity === "")
             newRecipe.ingredients = [];
@@ -30,7 +30,7 @@ function RecipeForm() {
         if(newRecipe.instructions.length == 1 && newRecipe.instructions[0].instruction === 'Step 1')
             newRecipe.instructions = [];
 
-        fetch(`http://localhost:8080/api/recipes/new/${cookbook.id}`,
+        fetch(`http://localhost:8080/api/recipes/new/${mealplan.id}`,
             {
                 method: 'POST',
                 headers: {
@@ -38,7 +38,7 @@ function RecipeForm() {
                 },
                 body: JSON.stringify(newRecipe)
             }
-        ).then(r => navigate(`/cookbooks/${cookbook.id}`))
+        ).then(r => navigate(-1))
     }
 
     const handleChange = (e) => {
@@ -55,7 +55,7 @@ function RecipeForm() {
 				},
 				body: JSON.stringify(newRecipe)
 			}
-		).then(response => navigate('cookbooks/'))
+		).then(response => navigate('mealplans/'))
     }
         
 
@@ -67,10 +67,10 @@ function RecipeForm() {
                     <Form.Label>Recipe Name</Form.Label>
                     <Form.Control type="text" placeholder="" name="name" value={recipe.name} onChange={handleChange}/>
                     <span className="leftContainer">
-                        <Form.Label>Cook Time (minutes)</Form.Label>
-                        <Form.Control type="number" placeholder="" name="cookTime" value={recipe.cookTime} onChange={handleChange} />
-                        <Form.Label>Prep Time (minutes)</Form.Label>
-                        <Form.Control type="number" placeholder="" name="prepTime" value={recipe.prepTime} onChange={handleChange}/>
+                        <Form.Label>Cook Time</Form.Label>
+                        <Form.Control type="text" placeholder="" name="cookTime" value={recipe.cookTime} onChange={handleChange} />
+                        <Form.Label>Prep Time</Form.Label>
+                        <Form.Control type="text" placeholder="" name="prepTime" value={recipe.prepTime} onChange={handleChange}/>
                     </span>
                     <ButtonToolbar>
                         <Button onClick={() => setInstructionModal(true)}>
@@ -86,7 +86,7 @@ function RecipeForm() {
                             <Button variant="danger" onClick={() => navigate(-1)}>Discard</Button>
                         </ButtonGroup>
                         <ButtonGroup>
-                            <Button variant="primary" type="submit">{isEdit ? 'Save' : `Save to ${cookbook.name}`}</Button>
+                            <Button variant="primary" type="submit">{isEdit ? 'Save' : `Save to ${mealplan.name}`}</Button>
                         </ButtonGroup>
                     </ButtonToolbar>
                 </Form>
@@ -98,4 +98,4 @@ function RecipeForm() {
     )
 }
 
-export default RecipeForm;
+export default RecipeFormMealplan;

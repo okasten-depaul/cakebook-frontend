@@ -5,8 +5,11 @@ import Cookbooks from './cookbook/Cookbooks';
 import CookbookForm from './cookbook/CookbookForm';
 import Mealplan from './mealplan/Mealplan';
 import MealplanForm from './mealplan/MealplanForm';
+import SingleRecipe from './recipe/SingleRecipe';
 import Mealplans from './mealplan/Mealplans';
-import RecipeForm from './recipe/RecipeForm';
+import RecipeFormCookbook from './recipe/RecipeFormCookbook';
+import RecipeFormMealplan from './recipe/RecipeFormMealplan';
+import Recipes from './recipe/Recipes';
 import SignupForm from './user/SignupForm';
 import LoginForm from './user/LoginForm';
 import Container from 'react-bootstrap/Container'
@@ -28,9 +31,13 @@ function App() {
         <Route path="cookbooks/new" element={<CookbookForm />}/>
         <Route path="mealplans" element = {<Mealplans />}/>
         <Route path="mealplans/new" element = {<MealplanForm />}/>
-          <Route path=":id" element={<Mealplan />}/>
-        <Route path="recipes/new" element={<RecipeForm/>}/>
-        <Route path="recipes/edit/:id" element={<RecipeForm/>}/>
+        <Route path="mealplans/:id" element={<Mealplan />}/>
+        <Route path="recipes/new" element={<RecipeFormCookbook/>}/>
+        <Route path="cookbooks/recipes/edit/:id" element={<RecipeFormCookbook/>}/>
+        <Route path="mealplans/recipes/new" element={<RecipeFormMealplan/>}/>
+        <Route path="mealplans/recipes/edit/:id" element={<RecipeFormMealplan/>}/>
+        <Route path ="recipes/all/:id" element = {<Recipes/>}/>
+        <Route path="recipe/:id" element={<SingleRecipe />}/>
         <Route path="sign-up" element = {<SignupForm />}/>
         <Route path="login" element = {<LoginForm />}/>
         <Route path="search" element={<SearchContainer />}/>
