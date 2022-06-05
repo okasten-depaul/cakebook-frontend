@@ -2,13 +2,15 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function MealplanForm() {
   const navigate = useNavigate();
+  const userInformation = useSelector((store) => store.userInformation)
 
   const addCookbook = (event) => {
     event.preventDefault();
-    axios.post(`http://localhost:8080/api/cookbook/new/1`, {
+    axios.post(`http://localhost:8080/api/cookbook/new/${userInformation.id}`, {
       name: event.currentTarget[0].value,
     })
 

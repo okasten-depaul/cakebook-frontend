@@ -34,6 +34,11 @@ $font-family-sans-serif: Mate;
 
 @import '~bootstrap/scss/bootstrap.scss';
 
+.container, .header {
+    max-width: 100%;
+    padding: 0%;
+}
+
 .centerContainer {
     display: flex;
     flex-direction: column;
@@ -139,5 +144,14 @@ a {
 
 .btn-toolbar{
     justify-content: space-around;
+}
+
+.searchForm {
+    display: inline-flex;
+    justify-content: center;
+    width: 50%;
+    background-color: #F2F4F3;
+    margin-left: 25%;
+    margin-top: 2%;
 }
 
