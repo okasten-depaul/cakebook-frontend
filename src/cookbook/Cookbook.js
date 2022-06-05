@@ -54,13 +54,10 @@ function Cookbook() {
 		return (
 			<ButtonToolbar>
 				<ButtonGroup>
-					<Button variant="primary" onClick={() => navigate('/recipes/new', {state: {cookbook: cookbook}})}>Add New Recipe</Button>
-				</ButtonGroup>
-				<ButtonGroup>
-					<Button variant="primary" onClick={'x'}>Add Existing Recipe</Button>
-				</ButtonGroup>
-				<ButtonGroup>
 					<Button variant="danger" onClick={deleteCookbook}>Delete Cookbook</Button>
+				</ButtonGroup>
+				<ButtonGroup>
+					<Button variant="primary" onClick={() => navigate('/recipes/new', {state: {cookbook: cookbook}})}>Add New Recipe</Button>
 				</ButtonGroup>
 			</ButtonToolbar>
 		)
@@ -69,7 +66,7 @@ function Cookbook() {
 	const updateRecipe = (e) => {
 		console.log(e)
 		const newRecipe = {...recipe, ...e};
-		debugger
+
 		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
 			{
 				method: 'PUT',

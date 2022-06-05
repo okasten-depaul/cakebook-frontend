@@ -7,8 +7,9 @@ import {  useSelector } from 'react-redux'
 function QuickAddForm() {
     const navigate = useNavigate();
     const location = useLocation();
+    const fromSearch = location.state.fromSearch;
     const [cookbooks, setCookbooks] = useState([]);
-    const [cookbook, setCookbook] = useState(null);
+    const [cookbook, setCookbook] = useState((location.state && location.state.cookbook) || null);
     const [recipes, setRecipes] = useState([]);
     const [recipe, setRecipe] = useState((location.state && location.state.recipe) || null);
 
@@ -29,7 +30,7 @@ function QuickAddForm() {
         setCookbook(c);
     }
 
-    const formRecipe = (newRecipe) => {
+    const formRecipe = (newRecipe, cookbookId) => {
         delete(newRecipe.id);
         delete(newRecipe.favorite);
         delete(newRecipe.isPublic);
@@ -41,16 +42,17 @@ function QuickAddForm() {
         })
         newRecipe.prepTime = newRecipe.prepTime.toString();
         newRecipe.cookTime = newRecipe.cookTime.toString();
-        newRecipe.name = newRecipe.name + ` (copy ${cookbook.id})`
+        newRecipe.name = newRecipe.name + ` (copy ${cookbookId})`
         return newRecipe
     }
 
     const addRecipe = (e) => {
         e.preventDefault();
         let newRecipe = {...recipe}
-        newRecipe = formRecipe(newRecipe);
+        let cookbookId = e.currentTarget[0].value;
+        newRecipe = formRecipe(newRecipe, cookbookId);
 
-        fetch(`http://localhost:8080/api/recipes/new/${cookbook.id}`,
+        fetch(`http://localhost:8080/api/recipes/new/${cookbookId}`,
             {
                 method: 'POST',
                 headers: {
@@ -58,13 +60,12 @@ function QuickAddForm() {
                 },
                 body: JSON.stringify(newRecipe)
             }
-        ).then(r => navigate(`/cookbooks/${cookbook.id}`))
+        ).then(r => navigate(`/cookbooks/${cookbookId}`))
         .catch(console.log)
     }
 
-    return(
-        <div className="centerContainer cookbookForm">
-            <h4 className="title">Add Recipe to Cookbook</h4>
+    const fromSearchForm = () => {
+        return (
             <Form onSubmit={addRecipe} className="formInput">
                 <Form.Label>Select a Cookbook</Form.Label>
                 <Form.Select onChange={handleChange}>
@@ -76,6 +77,13 @@ function QuickAddForm() {
 
                 <Button type="submit">Save</Button>
             </Form>
+        )
+    }
+
+    return(
+        <div className="centerContainer cookbookForm">
+            <h4 className="title">Add Recipe to Cookbook</h4>
+            {fromSearchForm()}
         </div>
     )
 }

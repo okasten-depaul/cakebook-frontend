@@ -1,4 +1,3 @@
-import { prop } from 'ramda';
 import React from 'react';
 import { ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import { Star, StarFill } from 'react-bootstrap-icons';
@@ -51,8 +50,8 @@ function Recipe(props){
             </h4>
             <div className="sideBySide">
                 <div>
-                    <p>Prep Time: {recipe.prepTime}</p>
-                    <p>Cook Time: {recipe.cookTime}</p>
+                    <p>Prep Time(minutes): {recipe.prepTime}</p>
+                    <p>Cook Time(minutes): {recipe.cookTime}</p>
                 </div>
                 {!props.fromSearch && <Button variant="warning" size="sm" onClick={() => updateRecipe({isPublic: !recipe.isPublic})}>Make {recipe.isPublic ? 'Private' : 'Public'}</Button>}
             </div>
