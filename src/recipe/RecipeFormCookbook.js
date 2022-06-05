@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import InstructionModal from './InstructionModal';
 import IngredientModal from './IngredientModal';
 
-function RecipeForm() {
+function RecipeFormCookbook() {
     const navigate = useNavigate();
     const location = useLocation();
     const cookbook = location.state && location.state.cookbook;
@@ -98,4 +98,4 @@ function RecipeForm() {
     )
 }
 
-export default RecipeForm;
+export default RecipeFormCookbook;

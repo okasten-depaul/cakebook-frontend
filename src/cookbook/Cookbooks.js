@@ -4,7 +4,7 @@ function Cookbooks() {
   const [cookbooks, setCookbooks] = useState([]);
 
   const createCookbooksList = () => {
-    return cookbooks.map(cookbook => <a href={`/cookbooks/${cookbook.id}`} className="centerItem" key={cookbook.id}>{cookbook.name}</a>)
+   return cookbooks.map(cookbook => <a href={`/cookbooks/${cookbook.id}`} className="centerItem" key={cookbook.id}>{cookbook.name}</a>) 
   }
 
   useEffect(() => {

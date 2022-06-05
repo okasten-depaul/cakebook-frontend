@@ -10,12 +10,19 @@ import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 import { useSelector } from 'react-redux'
 
 function Header() {
+  const [mealplans, setMealplans] = useState([]);
   const [cookbooks, setCookbooks] = useState([]);
   const userInformation = useSelector((store) => store.userInformation)
   useEffect(() => {
     fetch(`http://localhost:8080/api/cookbook/all`) //TODO this is going to have to change to use user
       .then(response => response.json())
       .then(data => setCookbooks(data))
+  }, [])
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/api/mealplan/all`) //TODO this is going to have to change to use user
+      .then(response => response.json())
+      .then(data => setMealplans(data))
   }, [])
 
 
@@ -34,8 +41,7 @@ function Header() {
   }
   
   const mealPlanDropdownItems = () => {
-    const mealplans = mealplansAPI.getMealplans();
-    const dropdownItems = mealplans.map(mealplan => <NavDropdown.Item key={mealplan.id} href={`/mealplans/${mealplan.id}`}>{mealplan.week}</NavDropdown.Item>);
+    const dropdownItems = mealplans.map(mealplan => <NavDropdown.Item key={mealplan.id} href={`/mealplans/${mealplan.id}`}>{mealplan.name}</NavDropdown.Item>);
   
     dropdownItems.push(
       [
