@@ -1,63 +1,109 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
 import Recipe from '../recipe/Recipe';
+import SingleRecipe from '../recipe/SingleRecipe';
+import { useDispatch } from 'react-redux'
+import {setRecipes} from '../redux/reducers/recipeSlice'
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Recipes = () => {
 
     const [recipes, setRecipes] = useState([]);
     const [recipe, setRecipe] = useState(null);
-    const params = useParams()
-
-
+    const navigate = useNavigate()
+    
     useEffect(() => {
         fetch(`http://localhost:8080/api/recipes/all`)
         .then(response => response.json())
         .then(data => setRecipes(data))
+        console.log("hi")
+        
         
 	}, [])
 
 
+    console.log(recipes)
+    
+    const recipeContainer = () => {
+		return (
+			<div className="leftContainer">
+				<h3 className="title">{"All Recipes"}</h3>
+				{createRecipeList()}
+			</div>
+		)
+	}
+    
     const createRecipeList = () => {
-        return recipes.map(recipe => <a href={`/recipe/${recipe.id}/${params.id}` } className="centerItem" key={recipe.id}>{recipe.name}</a>) 
+        return recipes.map(recipe => {
+        return <h5 onClick ={() => setRecipe(recipe)}  key={recipe.id} className="title">{recipe.name}</h5>
+    })
 }
-    
-    
+console.log(recipe)
 
-const updateRecipe = (e) => {
-    console.log(e)
-    const newRecipe = {...recipe, ...e};
-    fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
-        {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newRecipe)
-        }
-    ).then(response => response.json())
-    .then(r => setRecipe(newRecipe))
-    
+const ingredientList = () => {
+    return recipe.ingredients.map(ing => {
+        return (
+            <li key={ing.id}>
+                <div>
+                    {ing.name}
+                </div>
+                <div>
+                    {ing.quantity} {ing.measurement}
+                </div>            
+            </li>)
+    })
 }
 
-const deleteRecipe = (e) => {
-    fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
-        {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        }
-    ).then(
-        setRecipe(null)
+const instructionList = () => {
+    return recipe.instructions.map((instruction, i) => {
+        return (
+            <li key={instruction.id}>
+                {i + 1}. {instruction.instruction}
+            </li>
+        )
+    })
+}
+
+const getTimes = () => {
+
+    return <div>
+        <h2> Cook Time: {recipe.cookTime}</h2>
+        <h2> Prep Time: {recipe.prepTime}</h2>
+    
+    </div> 
+
+}
+
+const checkRecipe = (recipe) => {
+
+    return (<div> 
+       <h1 className = "leftContainer">
+    <h2> {getTimes()}</h2>
+    <h2> Ingredients: {ingredientList()}</h2>
+    <h2> Instructions: {instructionList()}</h2>
+
+    </h1>
+    </div>
     )
-    
-}
+    }
+
+
+
   return (
-    <div className="centerContainer cookbookIndex">
-    {createRecipeList()}
-</div>
- 
+
+    <div>
+      
+     {recipeContainer()}
+
+  {recipe && <SingleRecipe recipe = {recipe} ></SingleRecipe>} 
+  
+    </div>
+  
+      
+  
+   
   )
+   
+
 }
 
 export default Recipes

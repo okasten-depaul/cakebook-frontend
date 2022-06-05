@@ -6,6 +6,8 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { useNavigate, useLocation } from 'react-router-dom';
 import InstructionModal from './InstructionModal';
 import IngredientModal from './IngredientModal';
+import { useDispatch } from 'react-redux'
+import { addRecipe } from '../redux/reducers/recipeSlice'
 
 function RecipeFormCookbook() {
     const navigate = useNavigate();
@@ -18,7 +20,7 @@ function RecipeFormCookbook() {
     const [instructionModal, setInstructionModal] = useState(false);
     const [ingredients, setIngredients] = useState(recipe.ingredients);
     const [ingredientsModal, setIngredientsModal] = useState(false);
-
+    const dispatch = useDispatch()
 
     const createRecipe = (e) => {
         e.preventDefault();
@@ -43,6 +45,8 @@ function RecipeFormCookbook() {
 
     const handleChange = (e) => {
         setRecipe({...recipe, [e.target.name]: e.target.value})
+        dispatch(addRecipe(recipe))
+
     }
     
     const updateRecipe = () => {

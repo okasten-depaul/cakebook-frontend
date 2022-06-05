@@ -37,7 +37,7 @@ function App() {
         <Route path="mealplans/recipes/new" element={<RecipeFormMealplan/>}/>
         <Route path="mealplans/recipes/edit/:id" element={<RecipeFormMealplan/>}/>
         <Route path ="recipes/all/:id" element = {<Recipes/>}/>
-        <Route path="recipe/:id/:id" element={<SingleRecipe />}/>
+        <Route path="recipe/:id" element={<SingleRecipe />}/>
         <Route path="sign-up" element = {<SignupForm />}/>
         <Route path="login" element = {<LoginForm />}/>
       

@@ -16,7 +16,6 @@ function Mealplan () {
     let params = useParams()
     console.log(userInformation.id)
     console.log(params.id)
-    console.log(params)
 
     useEffect(() => {
 		const mealplanId = params.id
