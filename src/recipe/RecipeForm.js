@@ -38,7 +38,7 @@ function RecipeForm() {
                 },
                 body: JSON.stringify(newRecipe)
             }
-        ).then(r => navigate(-1))
+        ).then(r => navigate(`/cookbooks/${cookbook.id}`))
     }
 
     const handleChange = (e) => {

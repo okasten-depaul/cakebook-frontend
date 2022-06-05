@@ -37,6 +37,10 @@ function Recipe(props){
         navigate(`/recipes/edit/${recipe.id}`, {state: {recipe: recipe}})
     }
 
+    const addToCookbook = () => {
+        navigate(`/quick-add`, {state: {recipe: recipe}})
+    }
+
     return (
         <div className="rightContainer">
             <h4 className="title">
@@ -78,7 +82,7 @@ function Recipe(props){
             }
             {props.fromSearch &&
                 <ButtonToolbar>
-                    <Button variant="primary">Add to Existing Cookbook</Button>
+                    <Button variant="primary" onClick={addToCookbook}>Add to Existing Cookbook</Button>
                 </ButtonToolbar>
             }
         </div>

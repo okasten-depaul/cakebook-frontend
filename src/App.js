@@ -11,6 +11,7 @@ import SignupForm from './user/SignupForm';
 import LoginForm from './user/LoginForm';
 import Container from 'react-bootstrap/Container'
 import SearchContainer from './search/SearchContainer';
+import QuickAddForm from './quickAdd/QuickAddForm';
 import {
   Routes,
   Route,
@@ -33,6 +34,7 @@ function App() {
         <Route path="sign-up" element = {<SignupForm />}/>
         <Route path="login" element = {<LoginForm />}/>
         <Route path="search" element={<SearchContainer />}/>
+        <Route path="quick-add" element={<QuickAddForm/>}/>
       </Routes>
     </Container>
   );

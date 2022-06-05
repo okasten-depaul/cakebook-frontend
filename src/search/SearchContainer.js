@@ -11,7 +11,7 @@ function SearchContainer() {
         Object.keys(input).forEach(key => {
             if(!!input[key]){
                 input[key].split(',').forEach(val => {
-                    searchString += `${key}=${val}`
+                    searchString += `${key}=${val.trim()}`
                 })
             }  
         })
@@ -22,7 +22,7 @@ function SearchContainer() {
         e.preventDefault();
 
         if(formInput.ingredient)
-            formInput.ingredient = formInput.ingredient.replace(/[0-9]/g, '').trim()
+            formInput.ingredient = formInput.ingredient.replace(/[0-9]/g, '')
 
         fetch(`http://localhost:8080/api/recipes/all/${formatSearchString(formInput)}`)
         .then(r => r.json())

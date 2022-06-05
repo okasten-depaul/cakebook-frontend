@@ -9,7 +9,7 @@ function SearchForm(props) {
     const [form, setForm] = useState({name: '', ingredient: '', cookTime: 0})
 
     const handleChange = e => {
-        setForm({...form, [e.target.name]: e.target.value.trim()})
+        setForm({...form, [e.target.name]: e.target.value})
     }
 
     return (
