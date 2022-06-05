@@ -1,6 +1,5 @@
 import Header from './components/Header.js';
 import Homepage from './homepage/Homepage.js';
-import { Outlet } from 'react-router-dom';
 import Cookbook from './cookbook/Cookbook';
 import Cookbooks from './cookbook/Cookbooks'; 
 import CookbookForm from './cookbook/CookbookForm';
@@ -14,8 +13,9 @@ import Recipes from './recipe/Recipes';
 import SignupForm from './user/SignupForm';
 import LoginForm from './user/LoginForm';
 import Container from 'react-bootstrap/Container'
+import SearchContainer from './search/SearchContainer';
+import QuickAddForm from './quickAdd/QuickAddForm';
 import {
-  BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
@@ -40,7 +40,8 @@ function App() {
         <Route path="recipe/:id" element={<SingleRecipe />}/>
         <Route path="sign-up" element = {<SignupForm />}/>
         <Route path="login" element = {<LoginForm />}/>
-      
+        <Route path="search" element={<SearchContainer />}/>
+        <Route path="quick-add" element={<QuickAddForm/>}/>
       </Routes>
     </Container>
   );

@@ -24,7 +24,7 @@ function RecipeFormCookbook() {
 
     const createRecipe = (e) => {
         e.preventDefault();
-        debugger
+
         const newRecipe = {...recipe, instructions: instructions, ingredients: ingredients};
         if(newRecipe.ingredients.length == 1 && newRecipe.ingredients[0].quantity === "")
             newRecipe.ingredients = [];
@@ -40,7 +40,7 @@ function RecipeFormCookbook() {
                 },
                 body: JSON.stringify(newRecipe)
             }
-        ).then(r => navigate(-1))
+        ).then(r => navigate(`/cookbooks/${cookbook.id}`))
     }
 
     const handleChange = (e) => {
@@ -71,10 +71,10 @@ function RecipeFormCookbook() {
                     <Form.Label>Recipe Name</Form.Label>
                     <Form.Control type="text" placeholder="" name="name" value={recipe.name} onChange={handleChange}/>
                     <span className="leftContainer">
-                        <Form.Label>Cook Time</Form.Label>
-                        <Form.Control type="text" placeholder="" name="cookTime" value={recipe.cookTime} onChange={handleChange} />
-                        <Form.Label>Prep Time</Form.Label>
-                        <Form.Control type="text" placeholder="" name="prepTime" value={recipe.prepTime} onChange={handleChange}/>
+                        <Form.Label>Cook Time (minutes)</Form.Label>
+                        <Form.Control type="number" placeholder="" name="cookTime" value={recipe.cookTime} onChange={handleChange} />
+                        <Form.Label>Prep Time (minutes)</Form.Label>
+                        <Form.Control type="number" placeholder="" name="prepTime" value={recipe.prepTime} onChange={handleChange}/>
                     </span>
                     <ButtonToolbar>
                         <Button onClick={() => setInstructionModal(true)}>

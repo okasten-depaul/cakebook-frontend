@@ -4,15 +4,17 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import Recipe from '../recipe/Recipe';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 function Cookbook() { 
 	const [cookbook, setCookbook] = useState(null);
 	const [recipe, setRecipe] = useState(null);
 	const navigate = useNavigate();
+	const userInformation = useSelector((store) => store.userInformation)
 
 	useEffect(() => {
 		const cookbookId = parseInt(window.location.pathname.match(/([1-9])+/g)[0]);
-		fetch(`http://localhost:8080/api/cookbook/get/1`)
+		fetch(`http://localhost:8080/api/cookbook/get/${userInformation.id}`)
 		.then(response => response.json())
 		.then(cookbooks => {
 			if(cookbooks !== null)
@@ -36,14 +38,26 @@ function Cookbook() {
 		})
 	}
 
+	const deleteCookbook = () => {
+		fetch(`http://localhost:8080/api/cookbook/delete/${cookbook.id}/${userInformation.id}`,
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				}
+			}
+		)
+		.then(navigate('/cookbooks'))
+	}
+
 	const bottomButtons = () => {
 		return (
 			<ButtonToolbar>
 				<ButtonGroup>
-					<Button variant="primary" onClick={() => navigate('/recipes/new', {state: {cookbook: cookbook}})}>Add New Recipe</Button>
+					<Button variant="danger" onClick={deleteCookbook}>Delete Cookbook</Button>
 				</ButtonGroup>
 				<ButtonGroup>
-					<Button variant="primary" onClick={'x'}>Add Existing Recipe</Button>
+					<Button variant="primary" onClick={() => navigate('/recipes/new', {state: {cookbook: cookbook}})}>Add New Recipe</Button>
 				</ButtonGroup>
 			</ButtonToolbar>
 		)
@@ -52,6 +66,7 @@ function Cookbook() {
 	const updateRecipe = (e) => {
 		console.log(e)
 		const newRecipe = {...recipe, ...e};
+
 		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
 			{
 				method: 'PUT',
@@ -60,9 +75,7 @@ function Cookbook() {
 				},
 				body: JSON.stringify(newRecipe)
 			}
-		).then(response => response.json())
-		.then(r => setRecipe(newRecipe))
-		
+		).then(response => setRecipe(newRecipe))
 	}
 
 	const deleteRecipe = (e) => {
