@@ -4,15 +4,17 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import Recipe from '../recipe/Recipe';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 function Cookbook() { 
 	const [cookbook, setCookbook] = useState(null);
 	const [recipe, setRecipe] = useState(null);
 	const navigate = useNavigate();
+	const userInformation = useSelector((store) => store.userInformation)
 
 	useEffect(() => {
 		const cookbookId = parseInt(window.location.pathname.match(/([1-9])+/g)[0]);
-		fetch(`http://localhost:8080/api/cookbook/get/1`)
+		fetch(`http://localhost:8080/api/cookbook/get/${userInformation.id}`)
 		.then(response => response.json())
 		.then(cookbooks => {
 			if(cookbooks !== null)
@@ -36,6 +38,18 @@ function Cookbook() {
 		})
 	}
 
+	const deleteCookbook = () => {
+		fetch(`http://localhost:8080/api/cookbook/delete/${cookbook.id}/${userInformation.id}`,
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				}
+			}
+		)
+		.then(navigate('/cookbooks'))
+	}
+
 	const bottomButtons = () => {
 		return (
 			<ButtonToolbar>
@@ -44,6 +58,9 @@ function Cookbook() {
 				</ButtonGroup>
 				<ButtonGroup>
 					<Button variant="primary" onClick={'x'}>Add Existing Recipe</Button>
+				</ButtonGroup>
+				<ButtonGroup>
+					<Button variant="danger" onClick={deleteCookbook}>Delete Cookbook</Button>
 				</ButtonGroup>
 			</ButtonToolbar>
 		)
