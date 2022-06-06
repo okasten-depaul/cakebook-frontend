@@ -31,7 +31,7 @@ function Header() {
 
 
   const cookbookDropdownItems = () => {
-    if (userInformation.isLoggedIn) {
+    if (userInformation.isLoggedIn && userInformation.mealplans.length>0) {
     const dropdownItems = cookbooks.map((cookbook) => (
       <NavDropdown.Item key={cookbook.id} href={`/cookbooks/${cookbook.id}`}>
         {cookbook.name}
@@ -50,16 +50,29 @@ function Header() {
 
     return dropdownItems;
   }
+ 
+    const dropdownItems = [] 
+    dropdownItems.push([
+      <NavDropdown.Divider />,
+      <NavDropdown.Item key="new" href="/cookbooks/new">
+        Create New Cookbook
+      </NavDropdown.Item>,
+      
+    ]);
+
+    return dropdownItems;
+  
   };
 
   const mealPlanDropdownItems = () => {
-    if (userInformation.isLoggedIn) {
+    if (userInformation.isLoggedIn && userInformation.mealplans.length>0) {
     const dropdownItems = mealplans.map((mealplan) => (
       <NavDropdown.Item key={mealplan.id} href={`/mealplans/${mealplan.id}`}>
         {mealplan.name}
       </NavDropdown.Item>
     ));
 
+    
     dropdownItems.push([
       <NavDropdown.Divider />,
       <NavDropdown.Item key="all" href="/mealplans">
@@ -69,9 +82,19 @@ function Header() {
         Create New Mealplan
       </NavDropdown.Item>,
     ]);
+  
 
     return dropdownItems;
   }
+
+  const dropdownItems = []
+  dropdownItems.push([
+    <NavDropdown.Divider />,
+    <NavDropdown.Item key="new" href="/mealplans/new">
+      Create New Mealplan
+    </NavDropdown.Item>,
+  ]);
+  return dropdownItems;
   };
 
   return (
