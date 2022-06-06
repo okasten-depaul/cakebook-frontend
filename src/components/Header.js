@@ -18,7 +18,7 @@ function Header() {
   }, [])
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/mealplan/all`) //TODO this is going to have to change to use user
+    fetch(`${process.env.REACT_APP_API_URI}/api/mealplan/get/${userInformation.id}`)
       .then(response => response.json())
       .then(data => setMealplans(data))
   }, [])
