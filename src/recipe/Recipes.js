@@ -37,6 +37,7 @@ const Recipes = () => {
     });
   };
   console.log(recipe);
+  
 
   const ingredientList = () => {
     return recipe.ingredients.map((ing) => {
@@ -84,10 +85,13 @@ const Recipes = () => {
 
   return (
     <div className="sideBySide">
+       
       {recipeContainer()}
-
+      
       {recipe && <SingleRecipe recipe={recipe}></SingleRecipe>}
+      
     </div>
+
   );
 };
 

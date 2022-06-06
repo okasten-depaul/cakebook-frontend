@@ -9,7 +9,8 @@ import { useParams } from "react-router-dom";
 
 function Mealplan() {
   const [mealplan, setMealplan] = useState(null);
-  const [recipe, setRecipe] = useState(null);
+  const [recipe, setRecipe] = useState(null); 
+  const [ingredients, setIngredients] = useState([]);
   const navigate = useNavigate();
   const userInformation = useSelector((store) => store.userInformation);
   let params = useParams();
@@ -46,6 +47,11 @@ function Mealplan() {
       );
     });
   };
+
+  const ingredientList = () => {
+      
+  }
+
 
   const bottomButtons = () => {
     return (
@@ -96,6 +102,7 @@ function Mealplan() {
   return (
     <div className="sideBySide">
       {mealplan && mealplanContainer()}
+     
       {recipe && (
         <Recipe
           recipe={recipe}
@@ -103,6 +110,7 @@ function Mealplan() {
           deleteRecipe={deleteRecipe}
         />
       )}
+     
     </div>
   );
 }

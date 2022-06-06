@@ -13,20 +13,25 @@ function Header() {
   const userInformation = useSelector((store) => store.userInformation);
   useEffect(() => {
 
+    if (userInformation.isLoggedIn) {
+
     fetch(`${process.env.REACT_APP_API_URI}/api/cookbook/get/${userInformation.id}`)
       .then(response => response.json())
       .then(data => setCookbooks(data))
+    }
   }, [])
 
   useEffect(() => {
+    if (userInformation.isLoggedIn) {
     fetch(`${process.env.REACT_APP_API_URI}/api/mealplan/get/${userInformation.id}`)
       .then(response => response.json())
       .then(data => setMealplans(data))
-  }, [])
+  }}, [])
 
 
 
   const cookbookDropdownItems = () => {
+    if (userInformation.isLoggedIn) {
     const dropdownItems = cookbooks.map((cookbook) => (
       <NavDropdown.Item key={cookbook.id} href={`/cookbooks/${cookbook.id}`}>
         {cookbook.name}
@@ -44,9 +49,11 @@ function Header() {
     ]);
 
     return dropdownItems;
+  }
   };
 
   const mealPlanDropdownItems = () => {
+    if (userInformation.isLoggedIn) {
     const dropdownItems = mealplans.map((mealplan) => (
       <NavDropdown.Item key={mealplan.id} href={`/mealplans/${mealplan.id}`}>
         {mealplan.name}
@@ -64,6 +71,7 @@ function Header() {
     ]);
 
     return dropdownItems;
+  }
   };
 
   return (
