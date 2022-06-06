@@ -2,12 +2,20 @@ import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { AlignCenter, App, Images } from "react-bootstrap-icons";
 import "../App.css";
+import HomeRecipes from "./HomeRecipes";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
+
 
 const Homepage = () => {
   const userInformation = useSelector((store) => store.userInformation);
   const userName = userInformation.username;
   const [recipes, setRecipes] = useState([]);
   const [recipe, setRecipe] = useState([]);
+  const randomRecipe = null
+  const navigate = useNavigate()
   console.log(userName);
 
   useEffect(() => {
@@ -17,6 +25,92 @@ const Homepage = () => {
   }, []);
 
   console.log(recipes);
+
+  const createRandomRecList = () => {
+    if(recipes.length>0){
+    const rr = recipes.sort(() => Math.random() - Math.random())
+                     .find(() => true);
+    return (
+    <div>
+      <div className ="card text-light bg-primary mb-3">
+      <h5> {rr.name}</h5>
+      <h5> Cook time: {rr.cookTime} </h5>
+      <h5> Prep time: {rr.prepTime} </h5>
+      </div>
+      <div class="card text-primary border-primary mb-3"> Instructions: {instructionList(rr)} <div>    </div>Ingredients: {ingredientList(rr)}</div>
+      
+      </div>
+    )
+    } 
+    return <h5> "Looking for recipe recommendations...</h5>
+
+    
+  }
+
+  const instructionList = (rr) => {
+    return rr.instructions.map((instruction, i) => {
+      return (
+        <div ><li key={instruction.id}>
+          {i + 1}. {instruction.instruction}
+        </li>
+        </div>
+      );
+    });
+  };
+
+
+  const ingredientList = (rr) => {
+    return rr.ingredients.map((ing) => {
+      return (
+        <li key={ing.id}>
+          <div>{ing.name}</div>
+          <div>
+            {ing.quantity} {ing.measurement}
+          </div>
+        </li>
+      );
+    });
+  };
+
+  const displayRandomRecipe = () => {
+    if (userInformation.isLoggedIn) {
+      return (
+        <div className="card border-warning bg-primary mb-3">
+          <div className = "card text-light  bg-primary mb-3"> <h3 className="text-center" font-size="100px" font-color="light">
+            {" "}
+            Recipes Recommended for {userName} 
+          </h3>
+          </div>
+          <h5 className="text-center"> {recipes && createRandomRecList()}</h5>
+          <ButtonToolbar>
+        <ButtonGroup>
+          <Button
+            variant="light"
+            onClick={() =>
+              navigate(`/cookbooks/new`)
+            }
+ >
+           Create a cookbook to start adding your own recipes!
+          </Button>
+        </ButtonGroup>
+      </ButtonToolbar>
+        </div>
+      );
+    }
+    return (
+      <div className="card border-warning bg-light mb-3">
+        <h3 className="text-center" font-size="100px">
+          {" "}
+          Who are you?
+        </h3>
+        <a style={{ color: "light" }} href={`/sign-up`} className="text-center">
+          Log in to get recipe recommendations, create cookbooks, mealplans and
+          more!
+        </a>
+      </div>
+    );
+  };
+
 
   const createRecipeList = () => {
     return recipes.map((recipe) => {
@@ -28,6 +122,7 @@ const Homepage = () => {
     });
   };
 
+
   console.log(userInformation);
   console.log(userInformation.isLoggedIn);
   const displayUserName = () => {
@@ -36,6 +131,12 @@ const Homepage = () => {
     }
     return <h1 className="text-center"> Cakebook</h1>;
   };
+
+  
+
+  
+
+ 
 
   const displayRecipeRecs = () => {
     if (userInformation.isLoggedIn) {
@@ -46,6 +147,18 @@ const Homepage = () => {
             Recipes Recommended for {userName} 
           </h3>
           <h5 className="text-center"> {recipes && createRecipeList()}</h5>
+          <ButtonToolbar>
+        <ButtonGroup>
+          <Button
+            variant="light"
+            onClick={() =>
+              navigate(`/cookbooks/new`)
+            }
+ >
+           Create a cookbook to start adding your own recipes!
+          </Button>
+        </ButtonGroup>
+      </ButtonToolbar>
         </div>
       );
     }
@@ -91,7 +204,7 @@ const Homepage = () => {
                 />
               </div>
             </div>
-            <div class="col-6">{displayRecipeRecs()}</div>
+            <div class="col-6">  {displayRandomRecipe()} </div>
             <div class="col-2">
               <div className="images_left">
                 <img

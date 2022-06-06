@@ -13,7 +13,6 @@ const Recipes = () => {
     fetch(`http://localhost:8080/api/recipes/all`)
       .then((response) => response.json())
       .then((data) => setRecipes(data));
-    console.log("hi");
   }, []);
 
   console.log(recipes);
