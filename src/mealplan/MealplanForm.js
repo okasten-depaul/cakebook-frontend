@@ -11,18 +11,21 @@ function MealplanForm() {
   const userInformation = useSelector((store) => store.userInformation);
   const dispatch = useDispatch();
 
-  const addingMp =  (event) =>{
-    addMealplan(event)
-    dispatch(hasMealplans(userInformation))
-    alert('New Mealplan added to My Mealplans');
-    window.location.reload()
-  }
+  const addingMp = (event) => {
+    addMealplan(event);
+    dispatch(hasMealplans(userInformation));
+    alert("New Mealplan added to My Mealplans");
+    window.location.reload();
+  };
   const addMealplan = (event) => {
     event.preventDefault();
 
-    axios.post(`${process.env.REACT_APP_API_URI}/api/mealplan/new/${userInformation.id}`, {
-      name: event.currentTarget[0].value,
-    });
+    axios.post(
+      `${process.env.REACT_APP_API_URI}/api/mealplan/new/${userInformation.id}`,
+      {
+        name: event.currentTarget[0].value,
+      }
+    );
 
     navigate("/mealplans");
   };

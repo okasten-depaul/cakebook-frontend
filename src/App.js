@@ -29,8 +29,7 @@ function App() {
         <Route path="mealplans/new" element={<MealplanForm />} />
         <Route path="mealplans/:id" element={<Mealplan />} />
         <Route path="recipes/new" element={<RecipeFormCookbook />} />
-        <Route path="recipes/edit/:id" element={<RecipeFormCookbook />}
-        />
+        <Route path="recipes/edit/:id" element={<RecipeFormCookbook />} />
         <Route path="recipes/all/:id" element={<Recipes />} />
         <Route path="recipe/:id" element={<SingleRecipe />} />
         <Route path="sign-up" element={<SignupForm />} />

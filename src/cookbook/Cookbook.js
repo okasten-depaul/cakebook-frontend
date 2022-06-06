@@ -120,6 +120,7 @@ function Cookbook() {
           recipe={recipe}
           updateRecipe={(e) => updateRecipe(e)}
           deleteRecipe={deleteRecipe}
+		  cookbook={cookbook}
         />
       )}
     </div>

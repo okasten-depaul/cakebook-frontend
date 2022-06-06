@@ -5,23 +5,25 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function QuickAddForm() {
-
-    const navigate = useNavigate();
-    const location = useLocation();
-    const [cookbooks, setCookbooks] = useState([]);
-    const [cookbook, setCookbook] = useState((location.state && location.state.cookbook) || null);
-    const [recipe, setRecipe] = useState((location.state && location.state.recipe) || null);
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [cookbooks, setCookbooks] = useState([]);
+  const [cookbook, setCookbook] = useState(
+    (location.state && location.state.cookbook) || null
+  );
+  const [recipe, setRecipe] = useState(
+    (location.state && location.state.recipe) || null
+  );
 
   const userInformation = useSelector((store) => store.userInformation);
 
-
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URI}/api/cookbook/get/${userInformation.id}`)
-        .then(r => r.json())
-        .then(cookbooks => setCookbooks(cookbooks))
-    })
-
+  useEffect(() => {
+    fetch(
+      `${process.env.REACT_APP_API_URI}/api/cookbook/get/${userInformation.id}`
+    )
+      .then((r) => r.json())
+      .then((cookbooks) => setCookbooks(cookbooks));
+  });
 
   const createCookbookOptions = () => {
     return cookbooks.map((cookbook) => (
@@ -31,12 +33,10 @@ function QuickAddForm() {
     ));
   };
 
-
-    const handleChange = (e) => {
-        const c = cookbooks.find(cb => cb.id === e.currentTarget.value);
-        setCookbook(c);
-    }
-
+  const handleChange = (e) => {
+    const c = cookbooks.find((cb) => cb.id === e.currentTarget.value);
+    setCookbook(c);
+  };
 
   const formRecipe = (newRecipe, cookbookId) => {
     delete newRecipe.id;
@@ -62,19 +62,16 @@ function QuickAddForm() {
     let cookbookId = e.currentTarget[0].value;
     newRecipe = formRecipe(newRecipe, cookbookId);
 
-
-        fetch(`${process.env.REACT_APP_API_URI}/api/recipes/new/${cookbookId}`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newRecipe)
-            }
-        ).then(r => navigate(`/cookbooks/${cookbookId}`))
-        .catch(console.log)
-    }
-
+    fetch(`${process.env.REACT_APP_API_URI}/api/recipes/new/${cookbookId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newRecipe),
+    })
+      .then((r) => navigate(`/cookbooks/${cookbookId}`))
+      .catch(console.log);
+  };
 
   const fromSearchForm = () => {
     return (

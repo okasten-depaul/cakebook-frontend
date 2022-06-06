@@ -11,22 +11,22 @@ function CookbookForm() {
   const userInformation = useSelector((store) => store.userInformation);
   const dispatch = useDispatch();
 
-
-  const addingCB =  (event) =>{
-    addCookbook(event)
-    dispatch(hasCookbooks(userInformation))
-    alert('New Cookbook added to MyCookbooks');
-    window.location.reload()
-  }
+  const addingCB = (event) => {
+    addCookbook(event);
+    dispatch(hasCookbooks(userInformation));
+    alert("New Cookbook added to MyCookbooks");
+    window.location.reload();
+  };
   const addCookbook = (event) => {
     event.preventDefault();
-    axios.post(`${process.env.REACT_APP_API_URI}/api/cookbook/new/${userInformation.id}`, {
-      name: event.currentTarget[0].value,
-    });
+    axios.post(
+      `${process.env.REACT_APP_API_URI}/api/cookbook/new/${userInformation.id}`,
+      {
+        name: event.currentTarget[0].value,
+      }
+    );
 
     navigate("/cookbooks");
-   
-   
   };
 
   return (

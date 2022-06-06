@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 
 function Mealplan() {
   const [mealplan, setMealplan] = useState(null);
-  const [recipe, setRecipe] = useState(null); 
+  const [recipe, setRecipe] = useState(null);
   const [ingredients, setIngredients] = useState([]);
   const navigate = useNavigate();
   const userInformation = useSelector((store) => store.userInformation);
@@ -20,7 +20,9 @@ function Mealplan() {
   useEffect(() => {
     const mealplanId = params.id;
     console.log(mealplanId);
-    fetch(`${process.env.REACT_APP_API_URI}/api/mealplan/get/${userInformation.id}`)
+    fetch(
+      `${process.env.REACT_APP_API_URI}/api/mealplan/get/${userInformation.id}`
+    )
       .then((response) => response.json())
       .then((mealplans) => {
         if (mealplans !== null)
@@ -48,10 +50,7 @@ function Mealplan() {
     });
   };
 
-  const ingredientList = () => {
-      
-  }
-
+  const ingredientList = () => {};
 
   const bottomButtons = () => {
     return (
@@ -102,7 +101,7 @@ function Mealplan() {
   return (
     <div className="sideBySide">
       {mealplan && mealplanContainer()}
-     
+
       {recipe && (
         <Recipe
           recipe={recipe}
@@ -110,7 +109,6 @@ function Mealplan() {
           deleteRecipe={deleteRecipe}
         />
       )}
-     
     </div>
   );
 }

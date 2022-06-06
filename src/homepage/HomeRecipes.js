@@ -19,9 +19,12 @@ function HomeRecipes(r) {
     const mealplan = {
       id: params.id,
     };
-    axios.post(`${process.env.REACT_APP_API_URI}/api/mealplan/recipe/${recipe.id}`, {
-      id: params.id,
-    });
+    axios.post(
+      `${process.env.REACT_APP_API_URI}/api/mealplan/recipe/${recipe.id}`,
+      {
+        id: params.id,
+      }
+    );
   };
 
   const toMealplans = () => {
@@ -70,7 +73,6 @@ function HomeRecipes(r) {
           <ol className="u-textLeft">{instructionList()}</ol>
         </div>
       </div>
-      
     </div>
   );
 }

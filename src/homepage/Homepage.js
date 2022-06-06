@@ -7,14 +7,13 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 
-
 const Homepage = () => {
   const userInformation = useSelector((store) => store.userInformation);
   const userName = userInformation.username;
   const [recipes, setRecipes] = useState([]);
   const [recipe, setRecipe] = useState([]);
-  const randomRecipe = null
-  const navigate = useNavigate()
+  const randomRecipe = null;
+  const navigate = useNavigate();
   console.log(userName);
 
   useEffect(() => {
@@ -26,37 +25,39 @@ const Homepage = () => {
   console.log(recipes);
 
   const createRandomRecList = () => {
-    if(recipes.length>0){
-    const rr = recipes.sort(() => Math.random() - Math.random())
-                     .find(() => true);
-    return (
-    <div>
-      <div className ="card text-light bg-primary mb-3">
-      <h5> {rr.name}</h5>
-      <h5> Cook time: {rr.cookTime} </h5>
-      <h5> Prep time: {rr.prepTime} </h5>
-      </div>
-      <div class="card text-primary border-primary mb-3"> Instructions: {instructionList(rr)} <div>    </div>Ingredients: {ingredientList(rr)}</div>
-      
-      </div>
-    )
-    } 
-    return <h5> "Looking for recipe recommendations...</h5>
-
-    
-  }
+    if (recipes.length > 0) {
+      const rr = recipes
+        .sort(() => Math.random() - Math.random())
+        .find(() => true);
+      return (
+        <div>
+          <div className="card text-light bg-primary mb-3">
+            <h5> {rr.name}</h5>
+            <h5> Cook time: {rr.cookTime} </h5>
+            <h5> Prep time: {rr.prepTime} </h5>
+          </div>
+          <div class="card text-primary border-primary mb-3">
+            {" "}
+            Instructions: {instructionList(rr)} <div> </div>Ingredients:{" "}
+            {ingredientList(rr)}
+          </div>
+        </div>
+      );
+    }
+    return <h5> "Looking for recipe recommendations...</h5>;
+  };
 
   const instructionList = (rr) => {
     return rr.instructions.map((instruction, i) => {
       return (
-        <div ><li key={instruction.id}>
-          {i + 1}. {instruction.instruction}
-        </li>
+        <div>
+          <li key={instruction.id}>
+            {i + 1}. {instruction.instruction}
+          </li>
         </div>
       );
     });
   };
-
 
   const ingredientList = (rr) => {
     return rr.ingredients.map((ing) => {
@@ -75,24 +76,24 @@ const Homepage = () => {
     if (userInformation.isLoggedIn) {
       return (
         <div className="card border-warning bg-primary mb-3">
-          <div className = "card text-light  bg-primary mb-3"> <h3 className="text-center" font-size="100px" font-color="light">
+          <div className="card text-light  bg-primary mb-3">
             {" "}
-            Recipes Recommended for {userName} 
-          </h3>
+            <h3 className="text-center" font-size="100px" font-color="light">
+              {" "}
+              Recipes Recommended for {userName}
+            </h3>
           </div>
           <h5 className="text-center"> {recipes && createRandomRecList()}</h5>
           <ButtonToolbar>
-        <ButtonGroup>
-          <Button
-            variant="light"
-            onClick={() =>
-              navigate(`/cookbooks/new`)
-            }
- >
-           Create a cookbook to start adding your own recipes!
-          </Button>
-        </ButtonGroup>
-      </ButtonToolbar>
+            <ButtonGroup>
+              <Button
+                variant="light"
+                onClick={() => navigate(`/cookbooks/new`)}
+              >
+                Create a cookbook to start adding your own recipes!
+              </Button>
+            </ButtonGroup>
+          </ButtonToolbar>
         </div>
       );
     }
@@ -110,7 +111,6 @@ const Homepage = () => {
     );
   };
 
-
   const createRecipeList = () => {
     return recipes.map((recipe) => {
       return (
@@ -121,7 +121,6 @@ const Homepage = () => {
     });
   };
 
-
   console.log(userInformation);
   console.log(userInformation.isLoggedIn);
   const displayUserName = () => {
@@ -131,33 +130,25 @@ const Homepage = () => {
     return <h1 className="text-center"> Cakebook</h1>;
   };
 
-  
-
-  
-
- 
-
   const displayRecipeRecs = () => {
     if (userInformation.isLoggedIn) {
       return (
         <div className="card text-light border-warning bg-primary mb-3">
           <h3 className="text-center" font-size="100px">
             {" "}
-            Recipes Recommended for {userName} 
+            Recipes Recommended for {userName}
           </h3>
           <h5 className="text-center"> {recipes && createRecipeList()}</h5>
           <ButtonToolbar>
-        <ButtonGroup>
-          <Button
-            variant="light"
-            onClick={() =>
-              navigate(`/cookbooks/new`)
-            }
- >
-           Create a cookbook to start adding your own recipes!
-          </Button>
-        </ButtonGroup>
-      </ButtonToolbar>
+            <ButtonGroup>
+              <Button
+                variant="light"
+                onClick={() => navigate(`/cookbooks/new`)}
+              >
+                Create a cookbook to start adding your own recipes!
+              </Button>
+            </ButtonGroup>
+          </ButtonToolbar>
         </div>
       );
     }
@@ -203,7 +194,7 @@ const Homepage = () => {
                 />
               </div>
             </div>
-            <div class="col-6">  {displayRandomRecipe()} </div>
+            <div class="col-6"> {displayRandomRecipe()} </div>
             <div class="col-2">
               <div className="images_left">
                 <img
@@ -215,12 +206,12 @@ const Homepage = () => {
             </div>
           </div>
           <div class="row justify-content-md-center form-group">
-          <div class="col-2"></div>
-          <div class="col-2"></div>
-          <div class="col-2"></div>
+            <div class="col-2"></div>
+            <div class="col-2"></div>
+            <div class="col-2"></div>
           </div>
           <div class="row justify-content-md-center">
-          <div class="col-2" style ={{topMargin: '10px'}}>
+            <div class="col-2" style={{ topMargin: "10px" }}>
               <div
                 style={{
                   padding: "25 px",
@@ -230,7 +221,6 @@ const Homepage = () => {
                 }}
               >
                 <img
-                  
                   rightMargin="10px"
                   src="https://www.halfbakedharvest.com/wp-content/uploads/2022/04/Spicy-Chipotle-Honey-Salmon-Bowls-1-680x1020.jpg"
                   height="270px"
@@ -239,28 +229,28 @@ const Homepage = () => {
               </div>
             </div>
             <div class="col-2">
-            <img
-                  rightMargin="10px"
-                  src="https://www.halfbakedharvest.com/wp-content/uploads/2022/01/5-Ingredient-Chocolate-Almond-Butter-Cookies-8-680x1020.jpg"
-                  height="270px"
-                  class="rounded float-right"
-                />
+              <img
+                rightMargin="10px"
+                src="https://www.halfbakedharvest.com/wp-content/uploads/2022/01/5-Ingredient-Chocolate-Almond-Butter-Cookies-8-680x1020.jpg"
+                height="270px"
+                class="rounded float-right"
+              />
             </div>
             <div class="col-2">
-            <img
-                  rightMargin="10px"
-                  src="https://www.halfbakedharvest.com/wp-content/uploads/2020/06/Garden-Cherry-Bourbon-Smash-1-680x1020.jpg"
-                  height="270px"
-                  class="rounded float-right"
-                />
+              <img
+                rightMargin="10px"
+                src="https://www.halfbakedharvest.com/wp-content/uploads/2020/06/Garden-Cherry-Bourbon-Smash-1-680x1020.jpg"
+                height="270px"
+                class="rounded float-right"
+              />
             </div>
             <div class="col-2">
-            <img
-                  rightMargin="10px"
-                  src="https://www.halfbakedharvest.com/wp-content/uploads/2022/05/Maple-Glazed-Doughnuts-1-680x1020.jpg"
-                  height="270px"
-                  class="rounded float-right"
-                />
+              <img
+                rightMargin="10px"
+                src="https://www.halfbakedharvest.com/wp-content/uploads/2022/05/Maple-Glazed-Doughnuts-1-680x1020.jpg"
+                height="270px"
+                class="rounded float-right"
+              />
             </div>
             <div class="col-2">
               <div className="images_left">
@@ -274,8 +264,6 @@ const Homepage = () => {
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 };

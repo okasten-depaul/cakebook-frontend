@@ -4,13 +4,13 @@ import SingleRecipe from "../recipe/SingleRecipe";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-const Recipes = () => {
+const Recipes = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [recipe, setRecipe] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/recipes/all`)
+    fetch(`${process.env.REACT_APP_API_URI}/api/recipes/${props.cookbook.id}`)
       .then((response) => response.json())
       .then((data) => setRecipes(data));
   }, []);
@@ -36,7 +36,6 @@ const Recipes = () => {
     });
   };
   console.log(recipe);
-  
 
   const ingredientList = () => {
     return recipe.ingredients.map((ing) => {
@@ -84,13 +83,10 @@ const Recipes = () => {
 
   return (
     <div className="sideBySide">
-       
       {recipeContainer()}
-      
-      {recipe && <SingleRecipe recipe={recipe}></SingleRecipe>}
-      
-    </div>
 
+      {recipe && <SingleRecipe recipe={recipe}></SingleRecipe>}
+    </div>
   );
 };
 
