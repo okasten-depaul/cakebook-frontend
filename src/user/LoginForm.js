@@ -24,7 +24,7 @@ const LoginForm = () => {
         
         try {
             const{data} = await axios.post(
-                `http://localhost:8080/api/user/login`,
+                `${process.env.REACT_APP_API_URI}/api/user/login`,
                 userInfoObj
             )
             dispatch(loginSuccess(data))

@@ -26,13 +26,13 @@ function RecipeFormCookbook() {
         e.preventDefault();
 
         const newRecipe = {...recipe, instructions: instructions, ingredients: ingredients};
-        if(newRecipe.ingredients.length == 1 && newRecipe.ingredients[0].quantity === "")
+        if(newRecipe.ingredients.length === 1 && newRecipe.ingredients[0].quantity === "")
             newRecipe.ingredients = [];
 
-        if(newRecipe.instructions.length == 1 && newRecipe.instructions[0].instruction === 'Step 1')
+        if(newRecipe.instructions.length === 1 && newRecipe.instructions[0].instruction === 'Step 1')
             newRecipe.instructions = [];
 
-        fetch(`http://localhost:8080/api/recipes/new/${cookbook.id}`,
+        fetch(`${process.env.REACT_APP_API_URI}/api/recipes/new/${cookbook.id}`,
             {
                 method: 'POST',
                 headers: {
@@ -51,7 +51,7 @@ function RecipeFormCookbook() {
     
     const updateRecipe = () => {
 		const newRecipe = {...recipe, instructions: instructions, ingredients: ingredients};
-		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
+		fetch(`${process.env.REACT_APP_API_URI}/api/recipes/${recipe.id}`,
 			{
 				method: 'PUT',
 				headers: {

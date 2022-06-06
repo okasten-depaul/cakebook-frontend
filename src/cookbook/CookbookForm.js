@@ -10,7 +10,7 @@ function CookbookForm() {
 
   const addCookbook = (event) => {
     event.preventDefault();
-    axios.post(`http://localhost:8080/api/cookbook/new/${userInformation.id}`, {
+    axios.post(`${process.env.REACT_APP_API_URI}/api/cookbook/new/${userInformation.id}`, {
       name: event.currentTarget[0].value,
     })
 

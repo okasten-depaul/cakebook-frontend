@@ -14,7 +14,7 @@ function Cookbook() {
 
 	useEffect(() => {
 		const cookbookId = parseInt(window.location.pathname.match(/([1-9])+/g)[0]);
-		fetch(`http://localhost:8080/api/cookbook/get/${userInformation.id}`)
+		fetch(`${process.env.REACT_APP_API_URI}/api/cookbook/get/${userInformation.id}`)
 		.then(response => response.json())
 		.then(cookbooks => {
 			if(cookbooks !== null)
@@ -39,7 +39,7 @@ function Cookbook() {
 	}
 
 	const deleteCookbook = () => {
-		fetch(`http://localhost:8080/api/cookbook/delete/${cookbook.id}/${userInformation.id}`,
+		fetch(`${process.env.REACT_APP_API_URI}/api/cookbook/delete/${cookbook.id}/${userInformation.id}`,
 			{
 				method: 'DELETE',
 				headers: {
@@ -67,7 +67,7 @@ function Cookbook() {
 		console.log(e)
 		const newRecipe = {...recipe, ...e};
 
-		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
+		fetch(`${process.env.REACT_APP_API_URI}/api/recipes/${recipe.id}`,
 			{
 				method: 'PUT',
 				headers: {
@@ -79,7 +79,7 @@ function Cookbook() {
 	}
 
 	const deleteRecipe = (e) => {
-		fetch(`http://localhost:8080/api/recipes/${recipe.id}`,
+		fetch(`${process.env.REACT_APP_API_URI}/api/recipes/${recipe.id}`,
 			{
 				method: 'DELETE',
 				headers: {
