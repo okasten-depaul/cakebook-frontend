@@ -7,16 +7,14 @@ import {  useSelector } from 'react-redux'
 function QuickAddForm() {
     const navigate = useNavigate();
     const location = useLocation();
-    const fromSearch = location.state.fromSearch;
     const [cookbooks, setCookbooks] = useState([]);
     const [cookbook, setCookbook] = useState((location.state && location.state.cookbook) || null);
-    const [recipes, setRecipes] = useState([]);
     const [recipe, setRecipe] = useState((location.state && location.state.recipe) || null);
 
     const userInformation = useSelector((store) => store.userInformation)
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/cookbook/get/${userInformation.id}`)
+        fetch(`${process.env.REACT_APP_API_URI}/api/cookbook/get/${userInformation.id}`)
         .then(r => r.json())
         .then(cookbooks => setCookbooks(cookbooks))
     })
@@ -26,7 +24,7 @@ function QuickAddForm() {
     }
 
     const handleChange = (e) => {
-        const c = cookbooks.find(cb => cb.id == e.currentTarget.value);
+        const c = cookbooks.find(cb => cb.id === e.currentTarget.value);
         setCookbook(c);
     }
 
@@ -52,7 +50,7 @@ function QuickAddForm() {
         let cookbookId = e.currentTarget[0].value;
         newRecipe = formRecipe(newRecipe, cookbookId);
 
-        fetch(`http://localhost:8080/api/recipes/new/${cookbookId}`,
+        fetch(`${process.env.REACT_APP_API_URI}/api/recipes/new/${cookbookId}`,
             {
                 method: 'POST',
                 headers: {

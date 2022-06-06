@@ -11,7 +11,7 @@ function Cookbooks() {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/cookbook/get/${userInformation.id}`)
+    fetch(`${process.env.REACT_APP_API_URI}/api/cookbook/get/${userInformation.id}`)
       .then(response => response.json())
       .then(data => setCookbooks(data))
   }, [])

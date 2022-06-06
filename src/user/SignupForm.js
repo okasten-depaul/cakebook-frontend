@@ -63,7 +63,7 @@ const SignupForm = () => {
 
         try{
             const{data} = await axios.post(
-                `http://localhost:8080/api/user/sign-up`,
+                `${process.env.REACT_APP_API_URI}/api/user/sign-up`,
                 userInfoObj
             )
             navigate('/login')

@@ -24,7 +24,7 @@ function SearchContainer() {
         if(formInput.ingredient)
             formInput.ingredient = formInput.ingredient.replace(/[0-9]/g, '')
 
-        fetch(`http://localhost:8080/api/recipes/all/${formatSearchString(formInput)}`)
+        fetch(`${process.env.REACT_APP_API_URI}/api/recipes/all/${formatSearchString(formInput)}`)
         .then(r => r.json())
         .then(recipes => setRecipes(recipes))
         .catch(error => console.log(error))
