@@ -52,7 +52,7 @@ function SingleRecipe(r) {
   };
 
   return (
-    <div className="rightContainer">
+    <div className="leftContainer">
       <h4 className="title">{recipe.name}</h4>
       <div className="sideBySide">
         <div>

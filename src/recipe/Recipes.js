@@ -83,7 +83,7 @@ const Recipes = () => {
   };
 
   return (
-    <div>
+    <div className="sideBySide">
       {recipeContainer()}
 
       {recipe && <SingleRecipe recipe={recipe}></SingleRecipe>}

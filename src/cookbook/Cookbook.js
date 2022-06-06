@@ -80,6 +80,9 @@ function Cookbook() {
     );
   };
 
+  const updateRecipe = (e) => {
+		console.log(e)
+		const newRecipe = {...recipe, ...e};
 
 		fetch(`${process.env.REACT_APP_API_URI}/api/recipes/${recipe.id}`,
 			{
