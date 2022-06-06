@@ -76,10 +76,10 @@ function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavDropdown title="My Cookbooks" id="basic-nav-dropdown">
-              {cookbookDropdownItems()}
+              {userInformation.id && cookbookDropdownItems()}
             </NavDropdown>
             <NavDropdown title="Mealplans" id="basic-nav-dropdown">
-              {mealPlanDropdownItems()}
+              {userInformation.id && mealPlanDropdownItems()}
             </NavDropdown>
             <Navbar.Toggle />
             <Nav.Item>
