@@ -11,7 +11,7 @@ const Homepage = () => {
   console.log(userName);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/recipes/all`)
+    fetch(`${process.env.REACT_APP_API_URI}/api/recipes/all`)
       .then((response) => response.json())
       .then((data) => setRecipes(data));
   }, []);
