@@ -153,3 +153,11 @@ a {
   margin-left: 25%;
   margin-top: 2%;
 }
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+.navbar-brand>img {
+  padding: 7px 14px;
+}

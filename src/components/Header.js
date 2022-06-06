@@ -6,6 +6,8 @@ import Container from "react-bootstrap/Container";
 import * as mealplansAPI from "../api/mealplan";
 import { useSelector } from "react-redux";
 import { Search } from "react-bootstrap-icons";
+import { Image} from 'react-bootstrap'
+import logo from '../static/cb_logo.png'
 
 function Header() {
   const [mealplans, setMealplans] = useState([]);
@@ -31,7 +33,7 @@ function Header() {
 
 
   const cookbookDropdownItems = () => {
-    if (userInformation.isLoggedIn && userInformation.mealplans.length>0) {
+    if (userInformation.isLoggedIn && userInformation.hasCookbooks) {
     const dropdownItems = cookbooks.map((cookbook) => (
       <NavDropdown.Item key={cookbook.id} href={`/cookbooks/${cookbook.id}`}>
         {cookbook.name}
@@ -65,7 +67,7 @@ function Header() {
   };
 
   const mealPlanDropdownItems = () => {
-    if (userInformation.isLoggedIn && userInformation.mealplans.length>0) {
+    if (userInformation.isLoggedIn && userInformation.hasMealplans) {
     const dropdownItems = mealplans.map((mealplan) => (
       <NavDropdown.Item key={mealplan.id} href={`/mealplans/${mealplan.id}`}>
         {mealplan.name}
@@ -101,7 +103,8 @@ function Header() {
     <Navbar bg="light" expand="lg">
       <Container className="header">
         <Navbar.Brand href="/" style={{ marginLeft: "1rem" }}>
-          Cakebook
+        <Image style = {{height: '100px'}} src={logo} height={100} rounded fluid />
+          
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -122,14 +125,18 @@ function Header() {
           </Nav>
         </Navbar.Collapse>
       </Container>
-      <Navbar.Collapse className="justify-content-end">
+      <Navbar.Collapse style = {{marginRight: '20px'}}className="justify-content-end">
         <Nav>
           {!Object.keys(userInformation).length ? (
             <>
+            <div style = {{marginRight: '50px'}}>
               <Nav.Link href="/login">Login</Nav.Link>
-              <span>/</span>
+              </div>
+              <div>    </div>
               <Nav.Link href="/sign-up">Sign Up</Nav.Link>
+              
             </>
+           
           ) : (
             <span>Welcome, {userInformation.username}!</span>
           )}
