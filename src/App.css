@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.images_left {
+  display: "block";
+  float: "left";
+  margin-right: "5px";
+  margin-bottom: "5px";
+}
+.container_images {
+  padding: "10px";
+  margin-top: "25px";
+}
