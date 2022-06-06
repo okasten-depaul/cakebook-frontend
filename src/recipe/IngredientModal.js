@@ -10,6 +10,7 @@ function IngredientModal(props) {
   const ingredientsList = () => {
     return props.ingredients.map((ingredient) => {
       return (
+          
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <Form.Control
             key={`${ingredient.name}`}
@@ -63,6 +64,7 @@ function IngredientModal(props) {
   };
 
   const handleSave = (e) => {
+    e.preventDefault();
     addIngredient(e);
     props.setIngredientModal(false);
   };
