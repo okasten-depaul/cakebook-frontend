@@ -12,9 +12,9 @@ function RecipeFormCookbook() {
     const navigate = useNavigate();
     const location = useLocation();
     const cookbook = location.state && location.state.cookbook;
-    const isEdit = !!location.state.recipe;
+    const isEdit = !!location.state && !!location.state.recipe
 
-    const [recipe, setRecipe] = useState(location.state.recipe || {name: '', cookTime: '', prepTime: '', instructions: [{instruction: 'Step 1'}], ingredients: [{name: '', quantity: '', measurement: ''}]});
+    const [recipe, setRecipe] = useState(location.state && location.state.recipe|| {name: '', cookTime: '', prepTime: '', instructions: [{instruction: 'Step 1'}], ingredients: [{name: '', quantity: '', measurement: ''}]});
     const [instructions, setInstructions] = useState(recipe.instructions);
     const [instructionModal, setInstructionModal] = useState(false);
     const [ingredients, setIngredients] = useState(recipe.ingredients);
@@ -89,7 +89,7 @@ function RecipeFormCookbook() {
                             <Button variant="danger" onClick={() => navigate(-1)}>Discard</Button>
                         </ButtonGroup>
                         <ButtonGroup>
-                            <Button variant="primary" type="submit">{isEdit ? 'Save' : `Save to ${cookbook.name}`}</Button>
+                            <Button variant="primary" type="submit">Save</Button>
                         </ButtonGroup>
                     </ButtonToolbar>
                 </Form>
