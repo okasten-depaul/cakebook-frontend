@@ -59,16 +59,20 @@ const SignupForm = () => {
     console.log(username);
     console.log(password);
 
-    try {
-      const { data } = await axios.post(
-        `http://localhost:8080/api/user/sign-up`,
-        userInfoObj
-      );
-      navigate("/login");
-    } catch (err) {
-      if (!err.response) {
-        return;
-      }
+
+        try{
+            const{data} = await axios.post(
+                `${process.env.REACT_APP_API_URI}/api/user/sign-up`,
+                userInfoObj
+            )
+            navigate('/login')
+            
+        }
+     catch (err) {
+        if (!err.response) {
+            return
+        }
+
     }
   }
   return (

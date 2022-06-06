@@ -7,18 +7,37 @@ import { Alert, Button, Form } from "react-bootstrap";
 import { loginSuccess } from "../redux/reducers/userSlice";
 
 const LoginForm = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+   
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+   
+    async function handleLoginSubmit(e) {
+        e.preventDefault()
+        const userInfoObj = {
+            username: username,
+            pword: password
+            
+        }
+        
+        try {
+            const{data} = await axios.post(
+                `${process.env.REACT_APP_API_URI}/api/user/login`,
+                userInfoObj
+            )
+            dispatch(loginSuccess(data))
+            navigate('/')
+            
+        } 
+        catch (err) {
+            if (!err.response) {
+                return
+            }
+            const errorMessage = err?.response?.data
+        }
 
-  async function handleLoginSubmit(e) {
-    e.preventDefault();
-    const userInfoObj = {
-      username: username,
-      pword: password,
-    };
 
     try {
       const { data } = await axios.post(

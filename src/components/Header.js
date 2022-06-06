@@ -12,16 +12,19 @@ function Header() {
   const [cookbooks, setCookbooks] = useState([]);
   const userInformation = useSelector((store) => store.userInformation);
   useEffect(() => {
-    fetch(`http://localhost:8080/api/cookbook/all`) //TODO this is going to have to change to use user
-      .then((response) => response.json())
-      .then((data) => setCookbooks(data));
-  }, []);
+
+    fetch(`${process.env.REACT_APP_API_URI}/api/cookbook/get/${userInformation.id}`)
+      .then(response => response.json())
+      .then(data => setCookbooks(data))
+  }, [])
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/mealplan/all`) //TODO this is going to have to change to use user
-      .then((response) => response.json())
-      .then((data) => setMealplans(data));
-  }, []);
+    fetch(`${process.env.REACT_APP_API_URI}/api/mealplan/get/${userInformation.id}`)
+      .then(response => response.json())
+      .then(data => setMealplans(data))
+  }, [])
+
+
 
   const cookbookDropdownItems = () => {
     const dropdownItems = cookbooks.map((cookbook) => (

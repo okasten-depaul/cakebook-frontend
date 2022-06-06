@@ -12,15 +12,17 @@ function Cookbook() {
   const navigate = useNavigate();
   const userInformation = useSelector((store) => store.userInformation);
 
-  useEffect(() => {
-    const cookbookId = parseInt(window.location.pathname.match(/([1-9])+/g)[0]);
-    fetch(`http://localhost:8080/api/cookbook/get/${userInformation.id}`)
-      .then((response) => response.json())
-      .then((cookbooks) => {
-        if (cookbooks !== null)
-          setCookbook(cookbooks.find((cookbook) => cookbook.id === cookbookId));
-      });
-  }, []);
+
+	useEffect(() => {
+		const cookbookId = parseInt(window.location.pathname.match(/([1-9])+/g)[0]);
+		fetch(`${process.env.REACT_APP_API_URI}/api/cookbook/get/${userInformation.id}`)
+		.then(response => response.json())
+		.then(cookbooks => {
+			if(cookbooks !== null)
+				setCookbook(cookbooks.find(cookbook => cookbook.id === cookbookId))
+		})
+	}, [])
+
 
   const cookbookContainer = () => {
     return (
@@ -42,17 +44,19 @@ function Cookbook() {
     });
   };
 
-  const deleteCookbook = () => {
-    fetch(
-      `http://localhost:8080/api/cookbook/delete/${cookbook.id}/${userInformation.id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then(navigate("/cookbooks"));
-  };
+
+	const deleteCookbook = () => {
+		fetch(`${process.env.REACT_APP_API_URI}/api/cookbook/delete/${cookbook.id}/${userInformation.id}`,
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				}
+			}
+		)
+		.then(navigate('/cookbooks'))
+	}
+
 
   const bottomButtons = () => {
     return (
@@ -76,31 +80,34 @@ function Cookbook() {
     );
   };
 
-  const updateRecipe = (e) => {
-    console.log(e);
-    const newRecipe = { ...recipe, ...e };
 
-    fetch(`http://localhost:8080/api/recipes/${recipe.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newRecipe),
-    }).then((response) => setRecipe(newRecipe));
-  };
+		fetch(`${process.env.REACT_APP_API_URI}/api/recipes/${recipe.id}`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(newRecipe)
+			}
+		).then(response => setRecipe(newRecipe))
+	}
 
-  const deleteRecipe = (e) => {
-    fetch(`http://localhost:8080/api/recipes/${recipe.id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((r) => {
-      cookbook.recipes = cookbook.recipes.filter((r) => recipe.id !== r.id);
-      setCookbook(cookbook);
-      setRecipe(null);
-    });
-  };
+	const deleteRecipe = (e) => {
+		fetch(`${process.env.REACT_APP_API_URI}/api/recipes/${recipe.id}`,
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				}
+			}
+		).then(r => {
+			cookbook.recipes = cookbook.recipes.filter(r => recipe.id !== r.id);
+			setCookbook(cookbook);
+			setRecipe(null);
+		})
+		
+	}
+
 
   return (
     <div className="sideBySide">
