@@ -19,7 +19,7 @@ function SingleRecipe(r) {
     const mealplan = {
       id: params.id,
     };
-    axios.post(`http://localhost:8080/api/mealplan/recipe/${recipe.id}`, {
+    axios.post(`${process.env.REACT_APP_API_URI}/api/mealplan/recipe/${recipe.id}`, {
       id: params.id,
     });
   };

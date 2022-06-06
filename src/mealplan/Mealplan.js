@@ -19,7 +19,7 @@ function Mealplan() {
   useEffect(() => {
     const mealplanId = params.id;
     console.log(mealplanId);
-    fetch(`http://localhost:8080/api/mealplan/get/${userInformation.id}`)
+    fetch(`${process.env.REACT_APP_API_URI}/api/mealplan/get/${userInformation.id}`)
       .then((response) => response.json())
       .then((mealplans) => {
         if (mealplans !== null)
@@ -69,7 +69,7 @@ function Mealplan() {
   const updateRecipe = (e) => {
     console.log(e);
     const newRecipe = { ...recipe, ...e };
-    fetch(`http://localhost:8080/api/recipes/${recipe.id}`, {
+    fetch(`${process.env.REACT_APP_API_URI}/api/recipes/${recipe.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ function Mealplan() {
   };
 
   const deleteRecipe = (e) => {
-    fetch(`http://localhost:8080/api/recipes/${recipe.id}`, {
+    fetch(`${process.env.REACT_APP_API_URI}/api/recipes/${recipe.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

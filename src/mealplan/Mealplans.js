@@ -20,7 +20,7 @@ function Mealplans() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/mealplan/get/${userInformation.id}`)
+    fetch(`${process.env.REACT_APP_API_URI}/api/mealplan/get/${userInformation.id}`)
       .then((response) => response.json())
       .then((data) => setMealplans(data));
     console.log(mealplans);
