@@ -31,7 +31,7 @@ function Header() {
 
 
   const cookbookDropdownItems = () => {
-    if (userInformation.isLoggedIn && userInformation.mealplans.length>0) {
+    if (userInformation.isLoggedIn && userInformation.hasCookbooks) {
     const dropdownItems = cookbooks.map((cookbook) => (
       <NavDropdown.Item key={cookbook.id} href={`/cookbooks/${cookbook.id}`}>
         {cookbook.name}
@@ -65,7 +65,7 @@ function Header() {
   };
 
   const mealPlanDropdownItems = () => {
-    if (userInformation.isLoggedIn && userInformation.mealplans.length>0) {
+    if (userInformation.isLoggedIn && userInformation.hasMealplans) {
     const dropdownItems = mealplans.map((mealplan) => (
       <NavDropdown.Item key={mealplan.id} href={`/mealplans/${mealplan.id}`}>
         {mealplan.name}

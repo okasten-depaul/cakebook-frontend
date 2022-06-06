@@ -10,9 +10,19 @@ export const userSlice = createSlice({
       newObj.isLoggedIn = true;
       return Object.assign(newObj, action.payload);
     },
+    hasCookbooks: (state, action) => {
+      const newObj = clone(state);
+      newObj.hasCookbooks = true;
+      return Object.assign(newObj, action.payload);
+    },
+    hasMealplans: (state, action) => {
+      const newObj = clone(state);
+      newObj.hasMealplans = true;
+      return Object.assign(newObj, action.payload);
+    },
   },
 });
 
-export const { loginSuccess } = userSlice.actions;
+export const { loginSuccess, hasCookbooks, hasMealplans } = userSlice.actions;
 
 export default userSlice.reducer;
