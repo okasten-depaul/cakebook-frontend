@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { AlignCenter, App, Images } from "react-bootstrap-icons";
 import "../App.css";
-import HomeRecipes from "./HomeRecipes";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
