@@ -43,7 +43,7 @@ const Homepage = () => {
         <div className="card text-light border-warning bg-primary mb-3">
           <h3 className="text-center" font-size="100px">
             {" "}
-            Recipes Recommended for {userName} !
+            Recipes Recommended for {userName} 
           </h3>
           <h5 className="text-center"> {recipes && createRecipeList()}</h5>
         </div>
@@ -73,7 +73,7 @@ const Homepage = () => {
         </p>
 
         <div class="container">
-          <div class="row justify-content-md-center">
+          <div class="row justify-content-md-center form-group">
             <div class="col-2">
               <div
                 style={{
@@ -86,7 +86,7 @@ const Homepage = () => {
                 <img
                   rightMargin="10px"
                   src="https://www.halfbakedharvest.com/wp-content/uploads/2022/06/Detroit-Style-Tomato-Herb-Pepperoni-Pizza-1-680x1020.jpg"
-                  height="300px"
+                  height="270px"
                   class="rounded float-right"
                 />
               </div>
@@ -96,7 +96,65 @@ const Homepage = () => {
               <div className="images_left">
                 <img
                   src="https://www.halfbakedharvest.com/wp-content/uploads/2022/05/Chili-Crisp-Chicken-Mango-Cucumber-Rice-Bowl-1.jpg"
-                  height="300px"
+                  height="270px"
+                  class="rounded float-right"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-md-center form-group">
+          <div class="col-2"></div>
+          <div class="col-2"></div>
+          <div class="col-2"></div>
+          </div>
+          <div class="row justify-content-md-center">
+          <div class="col-2" style ={{topMargin: '10px'}}>
+              <div
+                style={{
+                  padding: "25 px",
+                  display: "block",
+                  float: "right",
+                  rightMargin: "5px",
+                }}
+              >
+                <img
+                  
+                  rightMargin="10px"
+                  src="https://www.halfbakedharvest.com/wp-content/uploads/2022/04/Spicy-Chipotle-Honey-Salmon-Bowls-1-680x1020.jpg"
+                  height="270px"
+                  class="rounded float-right"
+                />
+              </div>
+            </div>
+            <div class="col-2">
+            <img
+                  rightMargin="10px"
+                  src="https://www.halfbakedharvest.com/wp-content/uploads/2022/01/5-Ingredient-Chocolate-Almond-Butter-Cookies-8-680x1020.jpg"
+                  height="270px"
+                  class="rounded float-right"
+                />
+            </div>
+            <div class="col-2">
+            <img
+                  rightMargin="10px"
+                  src="https://www.halfbakedharvest.com/wp-content/uploads/2020/06/Garden-Cherry-Bourbon-Smash-1-680x1020.jpg"
+                  height="270px"
+                  class="rounded float-right"
+                />
+            </div>
+            <div class="col-2">
+            <img
+                  rightMargin="10px"
+                  src="https://www.halfbakedharvest.com/wp-content/uploads/2022/05/Maple-Glazed-Doughnuts-1-680x1020.jpg"
+                  height="270px"
+                  class="rounded float-right"
+                />
+            </div>
+            <div class="col-2">
+              <div className="images_left">
+                <img
+                  src="https://www.halfbakedharvest.com/wp-content/uploads/2022/04/Cauliflower-22Pepperoni22-Cheese-Pizza-1-1-680x1020.jpg"
+                  height="270px"
                   class="rounded float-right"
                 />
               </div>
@@ -105,24 +163,7 @@ const Homepage = () => {
         </div>
       </div>
 
-      <div className="centerContainer"></div>
-      <div style={{ padding: "25px" }}>
-        <div style={{ display: "block", float: "right", rightMargin: "5px" }}>
-          <img
-            rightMargin="10px"
-            src="https://www.halfbakedharvest.com/wp-content/uploads/2022/05/Strawberry-Mojito-1-680x1020.jpg"
-            height="300px"
-            class="rounded float-right"
-          />
-        </div>
-        <div className="images_left">
-          <img
-            src="https://www.halfbakedharvest.com/wp-content/uploads/2021/05/Pesto-Chicken-Corn-and-Avocado-Bacon-Pasta-Salad-7-1-680x1020.jpg"
-            height="300px"
-            class="rounded float-right"
-          />
-        </div>
-      </div>
+      
     </div>
   );
 };
